@@ -173,7 +173,7 @@ export default function ProductListingClient({
         <div className="space-y-3 border-t border-aela-dark-lighter pt-5">
           <h4 className="text-aela-cream text-xs tracking-widest uppercase">Categoria</h4>
           <div className="space-y-2">
-            {["feminino", "masculino", "acessorios"].map((cat) => (
+            {["feminino", "acessorios"].map((cat) => (
               <label key={cat} className="flex items-center gap-3 cursor-pointer group">
                 <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${
                   selectedCategories.includes(cat)

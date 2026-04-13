@@ -15,18 +15,28 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/feminino" className="text-sm hover:text-aela-gold transition-colors">
-                  Feminino
+                <Link href="/produtos?subcategory=vestidos" className="text-sm hover:text-aela-gold transition-colors">
+                  Vestidos
                 </Link>
               </li>
               <li>
-                <Link href="/masculino" className="text-sm hover:text-aela-gold transition-colors">
-                  Masculino
+                <Link href="/produtos?subcategory=tops" className="text-sm hover:text-aela-gold transition-colors">
+                  Tops & Blusas
                 </Link>
               </li>
               <li>
-                <Link href="/jeans" className="text-sm hover:text-aela-gold transition-colors">
-                  Jeans
+                <Link href="/produtos?subcategory=lingerie" className="text-sm hover:text-aela-gold transition-colors">
+                  Lingerie
+                </Link>
+              </li>
+              <li>
+                <Link href="/produtos?subcategory=sapatos" className="text-sm hover:text-aela-gold transition-colors">
+                  Sapatos
+                </Link>
+              </li>
+              <li>
+                <Link href="/produtos?subcategory=bolsas" className="text-sm hover:text-aela-gold transition-colors">
+                  Bolsas
                 </Link>
               </li>
               <li>

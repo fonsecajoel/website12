@@ -46,8 +46,8 @@ export default function ProductDetail({ product }: { product: Product }) {
         <nav className="flex items-center text-sm text-aela-gray mb-8">
           <Link href="/" className="hover:text-aela-gold transition-colors">Home</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
-          <Link href={`/categoria/${product.category}`} className="hover:text-aela-gold transition-colors capitalize">
-            {product.category}
+          <Link href={`/${product.category === "acessorios" ? "acessorios" : "produtos"}`} className="hover:text-aela-gold transition-colors capitalize">
+            {product.category === "acessorios" ? "Acessórios" : product.subcategory}
           </Link>
           <ChevronRight className="w-4 h-4 mx-2" />
           <span className="text-aela-cream">{product.name}</span>

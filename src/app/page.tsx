@@ -25,10 +25,10 @@ export default function Home() {
         
         <div className="relative z-20 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-aela-cream drop-shadow-lg">
-            Vista o extraordinário.
+            Vista o seu estilo de viver.
           </h1>
           <p className="mt-4 text-xl md:text-2xl text-aela-cream/90 max-w-2xl font-light">
-            Moda feminina e masculina com qualidade premium e estilo único.
+            Moda feminina com qualidade premium e estilo que transforma.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full sm:w-auto">

@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   originalPrice?: number;
   images: string[];
-  category: "feminino" | "masculino" | "acessorios";
+  category: "feminino" | "acessorios";
   subcategory: string;
   sizes: string[];
   colors: ProductColor[];
