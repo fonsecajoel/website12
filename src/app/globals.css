@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f5f0eb;
+  --aela-gold: #c9a96e;
+  --aela-gold-light: #d4ba85;
+  --aela-gold-dark: #a8864a;
+  --aela-cream: #f5f0eb;
+  --aela-cream-dark: #e8ddd2;
+  --aela-black: #0a0a0a;
+  --aela-dark: #141414;
+  --aela-dark-lighter: #1e1e1e;
+  --aela-gray: #6b6b6b;
+  --aela-gray-light: #a0a0a0;
+  --aela-white: #ffffff;
+  --aela-success: #4ade80;
+  --aela-error: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-aela-gold: var(--aela-gold);
+  --color-aela-gold-light: var(--aela-gold-light);
+  --color-aela-gold-dark: var(--aela-gold-dark);
+  --color-aela-cream: var(--aela-cream);
+  --color-aela-cream-dark: var(--aela-cream-dark);
+  --color-aela-black: var(--aela-black);
+  --color-aela-dark: var(--aela-dark);
+  --color-aela-dark-lighter: var(--aela-dark-lighter);
+  --color-aela-gray: var(--aela-gray);
+  --color-aela-gray-light: var(--aela-gray-light);
+  --color-aela-white: var(--aela-white);
+  --color-aela-success: var(--aela-success);
+  --color-aela-error: var(--aela-error);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--aela-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--aela-gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aela-gold-light);
+}
+
+/* Selection color */
+::selection {
+  background: var(--aela-gold);
+  color: var(--aela-black);
+}
+
+/* Hide scrollbar for carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
