@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { categories, getNewProducts, getPromoProducts } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
+import HeroSection from "@/components/HeroSection";
 import { Truck, CreditCard, RefreshCcw, Tag } from "lucide-react";
 
 export default function Home() {
@@ -11,42 +12,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-aela-black text-aela-cream">
       
-      <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-aela-black via-aela-black/80 to-aela-gold/20 z-10" />
-        
-        <Image 
-          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop"
-          alt="Hero Background"
-          fill
-          className="object-cover object-center opacity-40"
-          priority
-          unoptimized
-        />
-        
-        <div className="relative z-20 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-aela-cream drop-shadow-lg">
-            Vista o seu estilo de viver.
-          </h1>
-          <p className="mt-4 text-xl md:text-2xl text-aela-cream/90 max-w-2xl font-light">
-            Moda feminina com qualidade premium e estilo que transforma.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 pt-8 w-full sm:w-auto">
-            <Link 
-              href="/produtos" 
-              className="inline-flex justify-center items-center px-8 py-4 text-base font-semibold bg-aela-gold text-aela-black hover:bg-aela-gold-light transition-colors duration-300 rounded-sm uppercase tracking-wider"
-            >
-              Explorar Coleção
-            </Link>
-            <Link 
-              href="/produtos?filter=novidades" 
-              className="inline-flex justify-center items-center px-8 py-4 text-base font-semibold border-2 border-aela-gold text-aela-gold hover:bg-aela-gold/10 transition-colors duration-300 rounded-sm uppercase tracking-wider"
-            >
-              Novidades
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-aela-black border-b border-white/5">
         <div className="max-w-7xl mx-auto">
