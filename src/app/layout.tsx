@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Aela. | Moda Feminina Premium",
-  description: "Descubra vestidos, sapatos, bolsas e acessórios de luxo na Aela. Moda feminina com qualidade premium para mulheres que comandam o seu estilo.",
+  title: "Aela. | Moda Feminina de Luxo",
+  description: "Descubra vestidos, sapatos, malas e acessórios de luxo na Aela. Moda feminina com qualidade premium para mulheres que definem o seu próprio estilo.",
 };
 
 export default function RootLayout({
@@ -26,11 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="pt-PT" className="h-full antialiased">
+        <body className="min-h-full flex flex-col bg-noir-950 text-warm-100">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

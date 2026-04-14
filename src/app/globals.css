@@ -1,83 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f5f0eb;
-  --aela-gold: #c9a96e;
-  --aela-gold-light: #d4ba85;
-  --aela-gold-dark: #a8864a;
-  --aela-cream: #f5f0eb;
-  --aela-cream-dark: #e8ddd2;
-  --aela-black: #0a0a0a;
-  --aela-dark: #141414;
-  --aela-dark-lighter: #1e1e1e;
-  --aela-gray: #6b6b6b;
-  --aela-gray-light: #a0a0a0;
-  --aela-white: #ffffff;
-  --aela-success: #4ade80;
-  --aela-error: #ef4444;
+  /* Deep black base */
+  --color-noir-950: #050505;
+  --color-noir-900: #0A0A0A;
+  --color-noir-800: #111111;
+  --color-noir-700: #1A1A1A;
+  --color-noir-600: #252525;
+  --color-noir-500: #333333;
+
+  /* Gold spectrum — Versace-level opulence */
+  --color-gold-50: #FFF9E6;
+  --color-gold-100: #F5E6B8;
+  --color-gold-200: #E8D48E;
+  --color-gold-300: #D4B96A;
+  --color-gold-400: #C9A84E;
+  --color-gold-500: #B8943A;
+  --color-gold-600: #9A7B2E;
+  --color-gold-700: #7A6124;
+
+  /* Warm neutrals for text hierarchy */
+  --color-warm-100: #F5F0E8;
+  --color-warm-200: #E0D6C8;
+  --color-warm-300: #B8AFA3;
+  --color-warm-400: #8A8178;
+  --color-warm-500: #6B6358;
+
+  /* Accent — deep wine for subtle contrast */
+  --color-wine-500: #8B3A3A;
+  --color-wine-600: #6B2C2C;
+
+  /* Semantic */
+  --background: var(--color-noir-950);
+  --foreground: var(--color-warm-100);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-aela-gold: var(--aela-gold);
-  --color-aela-gold-light: var(--aela-gold-light);
-  --color-aela-gold-dark: var(--aela-gold-dark);
-  --color-aela-cream: var(--aela-cream);
-  --color-aela-cream-dark: var(--aela-cream-dark);
-  --color-aela-black: var(--aela-black);
-  --color-aela-dark: var(--aela-dark);
-  --color-aela-dark-lighter: var(--aela-dark-lighter);
-  --color-aela-gray: var(--aela-gray);
-  --color-aela-gray-light: var(--aela-gray-light);
-  --color-aela-white: var(--aela-white);
-  --color-aela-success: var(--aela-success);
-  --color-aela-error: var(--aela-error);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-noir-950: var(--color-noir-950);
+  --color-noir-900: var(--color-noir-900);
+  --color-noir-800: var(--color-noir-800);
+  --color-noir-700: var(--color-noir-700);
+  --color-noir-600: var(--color-noir-600);
+  --color-noir-500: var(--color-noir-500);
+
+  --color-gold-50: var(--color-gold-50);
+  --color-gold-100: var(--color-gold-100);
+  --color-gold-200: var(--color-gold-200);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-700: var(--color-gold-700);
+
+  --color-warm-100: var(--color-warm-100);
+  --color-warm-200: var(--color-warm-200);
+  --color-warm-300: var(--color-warm-300);
+  --color-warm-400: var(--color-warm-400);
+  --color-warm-500: var(--color-warm-500);
+
+  --color-wine-500: var(--color-wine-500);
+  --color-wine-600: var(--color-wine-600);
+
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Dark luxury scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--aela-dark);
+  background: var(--color-noir-900);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--aela-gold);
-  border-radius: 3px;
+  background: var(--color-gold-600);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--aela-gold-light);
+  background: var(--color-gold-400);
 }
 
-/* Selection color */
+/* Gold selection */
 ::selection {
-  background: var(--aela-gold);
-  color: var(--aela-black);
+  background: var(--color-gold-500);
+  color: var(--color-noir-950);
 }
 
-/* Hide scrollbar for carousel */
+/* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Serif heading utility */
+.font-serif {
+  font-family: var(--font-serif);
 }
