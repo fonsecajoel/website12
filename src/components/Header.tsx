@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { label: "Vestidos", href: "/produtos?subcategory=vestidos" },
   { label: "Tops & Blusas", href: "/produtos?subcategory=tops" },
   { label: "Saias", href: "/produtos?subcategory=saias" },
-  { label: "Lingerie", href: "/produtos?subcategory=lingerie" },
+
   { label: "Sapatos", href: "/produtos?subcategory=sapatos" },
   { label: "Bolsas", href: "/produtos?subcategory=bolsas" },
   { label: "Acessórios", href: "/acessorios" },

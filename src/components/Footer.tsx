@@ -24,11 +24,7 @@ export function Footer() {
                   Tops & Blusas
                 </Link>
               </li>
-              <li>
-                <Link href="/produtos?subcategory=lingerie" className="text-sm hover:text-aela-gold transition-colors">
-                  Lingerie
-                </Link>
-              </li>
+
               <li>
                 <Link href="/produtos?subcategory=sapatos" className="text-sm hover:text-aela-gold transition-colors">
                   Sapatos

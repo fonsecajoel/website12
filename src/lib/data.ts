@@ -12,7 +12,7 @@ export const categories: Category[] = [
   { name: "Tops & Blusas", slug: "tops", image: img(200, 200, "Tops") },
   { name: "Saias", slug: "saias", image: img(200, 200, "Saias") },
   { name: "Calças", slug: "calcas", image: img(200, 200, "Calças") },
-  { name: "Lingerie", slug: "lingerie", image: img(200, 200, "Lingerie") },
+
   { name: "Sapatos", slug: "sapatos", image: img(200, 200, "Sapatos") },
   { name: "Bolsas", slug: "bolsas", image: img(200, 200, "Bolsas") },
   { name: "Acessórios", slug: "acessorios", image: img(200, 200, "Acc") },
@@ -123,27 +123,7 @@ export const products: Product[] = [
     description: "Vestido longo de festa com brilho sofisticado e fenda lateral. A peça perfeita para arrasar em qualquer evento especial.",
     isNew: true,
   },
-  {
-    id: "6",
-    name: "Conjunto Lingerie Renda Francesa",
-    slug: "conjunto-lingerie-renda-francesa",
-    price: 189.9,
-    originalPrice: 249.9,
-    images: [
-      img(600, 800, "Lingerie+1"),
-      img(600, 800, "Lingerie+2"),
-    ],
-    category: "feminino",
-    subcategory: "lingerie",
-    sizes: ["PP", "P", "M", "G"],
-    colors: [
-      { name: "Preto", hex: "#1a1a1a" },
-      { name: "Bordô", hex: "#800020" },
-      { name: "Nude Rosé", hex: "#c8a2a2" },
-    ],
-    description: "Conjunto de lingerie em renda francesa com acabamento artesanal. Delicadeza e sensualidade que te fazem sentir poderosa.",
-    isPromo: true,
-  },
+
   {
     id: "7",
     name: "Bolsa Structured Couro Premium",

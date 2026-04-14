@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Aela. | Moda Feminina Premium",
-  description: "Descubra vestidos, lingerie, sapatos, bolsas e acessórios de luxo na Aela. Moda feminina com qualidade premium para mulheres que comandam o seu estilo.",
+  description: "Descubra vestidos, sapatos, bolsas e acessórios de luxo na Aela. Moda feminina com qualidade premium para mulheres que comandam o seu estilo.",
 };
 
 export default function RootLayout({
