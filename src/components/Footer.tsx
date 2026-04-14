@@ -3,40 +3,44 @@ import { ArrowRight } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-aela-dark text-aela-cream-dark pt-16 pb-8 border-t border-white/5">
+    <footer className="bg-noir-900 text-warm-300 pt-20 pb-10 border-t border-gold-700/20 font-sans">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <h3 className="text-aela-gold font-medium tracking-[0.15em] uppercase text-sm">Departamentos</h3>
+            <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Comprar</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/novidades" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/novidades" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Novidades
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=vestidos" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/produtos?subcategory=vestidos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Vestidos
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=tops" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/produtos?subcategory=tops" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Tops & Blusas
                 </Link>
               </li>
-
               <li>
-                <Link href="/produtos?subcategory=sapatos" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/produtos?subcategory=saias" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Saias
+                </Link>
+              </li>
+              <li>
+                <Link href="/produtos?subcategory=sapatos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Sapatos
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=bolsas" className="text-sm hover:text-aela-gold transition-colors">
-                  Bolsas
+                <Link href="/produtos?subcategory=malas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Malas
                 </Link>
               </li>
               <li>
-                <Link href="/acessorios" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/acessorios" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Acessórios
                 </Link>
               </li>
@@ -44,111 +48,107 @@ export function Footer() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-aela-gold font-medium tracking-[0.15em] uppercase text-sm">Sobre Nós</h3>
+            <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Sobre</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/sobre" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/sobre" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   A Marca
                 </Link>
               </li>
               <li>
-                <Link href="/lojas" className="text-sm hover:text-aela-gold transition-colors">
-                  Nossas Lojas
+                <Link href="/lojas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  As Nossas Lojas
                 </Link>
               </li>
               <li>
-                <Link href="/sustentabilidade" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/sustentabilidade" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Sustentabilidade
                 </Link>
               </li>
               <li>
-                <Link href="/trabalhe-conosco" className="text-sm hover:text-aela-gold transition-colors">
-                  Trabalhe Conosco
+                <Link href="/carreiras" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Carreiras
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-aela-gold font-medium tracking-[0.15em] uppercase text-sm">Ajuda</h3>
+            <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Ajuda</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/faq" className="text-sm hover:text-aela-gold transition-colors">
-                  Dúvidas Frequentes
+                <Link href="/faq" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Perguntas Frequentes
                 </Link>
               </li>
               <li>
-                <Link href="/entregas" className="text-sm hover:text-aela-gold transition-colors">
-                  Entregas e Frete
+                <Link href="/entregas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Entregas e Portes
                 </Link>
               </li>
               <li>
-                <Link href="/trocas" className="text-sm hover:text-aela-gold transition-colors">
+                <Link href="/trocas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Trocas e Devoluções
                 </Link>
               </li>
               <li>
-                <Link href="/contato" className="text-sm hover:text-aela-gold transition-colors">
-                  Fale Conosco
+                <Link href="/contato" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Contacte-nos
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-12">
             <div className="space-y-6">
-              <h3 className="text-aela-gold font-medium tracking-[0.15em] uppercase text-sm">Redes Sociais</h3>
-              <div className="flex space-x-4">
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-aela-black flex items-center justify-center text-aela-cream hover:text-aela-black hover:bg-aela-gold transition-all duration-300 group">
-                  <span className="text-xs font-mono group-hover:scale-110 transition-transform">IG</span>
-                </a>
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-aela-black flex items-center justify-center text-aela-cream hover:text-aela-black hover:bg-aela-gold transition-all duration-300 group">
-                  <span className="text-xs font-mono group-hover:scale-110 transition-transform">FB</span>
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-aela-black flex items-center justify-center text-aela-cream hover:text-aela-black hover:bg-aela-gold transition-all duration-300 group">
-                  <span className="text-xs font-mono group-hover:scale-110 transition-transform">X</span>
-                </a>
-                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-aela-black flex items-center justify-center text-aela-cream hover:text-aela-black hover:bg-aela-gold transition-all duration-300 group">
-                  <span className="text-xs font-mono group-hover:scale-110 transition-transform">YT</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-aela-gold font-medium tracking-[0.15em] uppercase text-sm">Newsletter</h3>
-              <p className="text-xs text-aela-gray-light leading-relaxed">
-                Receba novidades e promoções exclusivas em primeira mão.
-              </p>
-              <form className="flex border-b border-aela-gray/30 group">
+              <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Newsletter</h3>
+              <form className="flex border-b border-warm-400/30 group relative focus-within:border-gold-400 transition-colors duration-300">
                 <input 
                   type="email" 
-                  placeholder="Seu melhor e-mail" 
-                  className="bg-transparent w-full py-2 text-sm text-aela-cream focus:outline-none placeholder:text-aela-gray/50"
+                  placeholder="O seu endereço de email" 
+                  className="bg-transparent w-full py-2 text-sm text-warm-100 focus:outline-none placeholder:text-warm-400/50"
                   required
                 />
                 <button 
                   type="submit" 
-                  className="p-2 text-aela-gray hover:text-aela-gold transition-colors"
-                  aria-label="Assinar newsletter"
+                  className="p-2 text-warm-400 hover:text-gold-400 transition-colors"
+                  aria-label="Subscrever newsletter"
                 >
-                  <ArrowRight className="w-5 h-5 group-focus-within:text-aela-gold transition-colors" />
+                  <ArrowRight className="w-5 h-5 group-focus-within:text-gold-400 transition-colors" />
                 </button>
               </form>
+            </div>
+
+            <div className="space-y-6">
+              <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Redes Sociais</h3>
+              <ul className="space-y-4">
+                <li>
+                  <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a href="https://facebook.com" target="_blank" rel="noreferrer" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a href="https://pinterest.com" target="_blank" rel="noreferrer" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                    Pinterest
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 gap-6">
-          <div className="flex flex-wrap justify-center items-center gap-3">
-            <span className="text-xs font-mono text-aela-gray-light px-2 py-1 bg-aela-black rounded">PIX</span>
-            <span className="text-xs font-mono text-aela-gray-light px-2 py-1 bg-aela-black rounded">VISA</span>
-            <span className="text-xs font-mono text-aela-gray-light px-2 py-1 bg-aela-black rounded">MASTERCARD</span>
-            <span className="text-xs font-mono text-aela-gray-light px-2 py-1 bg-aela-black rounded">AMEX</span>
-            <span className="text-xs font-mono text-aela-gray-light px-2 py-1 bg-aela-black rounded">BOLETO</span>
+        <div className="flex flex-col md:flex-row items-center justify-between pt-10 border-t border-gold-700/20 gap-6">
+          <div className="text-[10px] uppercase tracking-widest text-warm-400">
+            Visa · Mastercard · American Express · PayPal · MB Way · Multibanco
           </div>
 
-          <p className="text-xs text-aela-gray-light text-center md:text-right">
-            Aela. © 2025. Todos os direitos reservados.
+          <p className="text-[11px] text-warm-500 text-center md:text-right tracking-wide">
+            <span className="text-gold-400 font-serif mr-1">Aela.</span> © 2026. Todos os direitos reservados.
           </p>
         </div>
       </div>

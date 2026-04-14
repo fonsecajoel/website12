@@ -3,61 +3,51 @@ import Link from "next/link";
 import { formatPrice } from "@/lib/data";
 import { Product } from "@/lib/types";
 
-interface ProductCardProps {
-  product: Product;
-}
-
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Link href={`/produto/${product.slug}`} className="group block w-full relative">
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-aela-dark-lighter rounded-sm mb-4">
-        <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
-          {product.isNew && (
-            <span className="bg-aela-gold text-aela-black text-[10px] font-bold tracking-widest uppercase px-2 py-1">
-              Novo
-            </span>
-          )}
-          {product.isPromo && (
-            <span className="bg-red-700 text-aela-cream text-[10px] font-bold tracking-widest uppercase px-2 py-1">
-              Promo
-            </span>
-          )}
-        </div>
-
+    <Link href={`/produto/${product.slug}`} className="group block bg-noir-800 rounded-sm overflow-hidden border border-transparent hover:border-gold-500/30 transition-colors duration-500">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-noir-700">
         {product.images && product.images.length > 0 ? (
           <Image
             src={product.images[0]}
             alt={product.name}
             fill
-            className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             unoptimized
           />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-aela-dark text-aela-gray">
-            Sem imagem
-          </div>
-        )}
+        ) : null}
         
-        <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10"></div>
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          {product.isNew && (
+            <span className="text-gold-400 text-xs uppercase tracking-widest font-medium drop-shadow-md">
+              Novo
+            </span>
+          )}
+          {product.isPromo && (
+            <span className="bg-wine-500 text-warm-100 text-[10px] uppercase tracking-widest px-2 py-1">
+              Promo
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="flex flex-col space-y-1">
-        <h3 className="text-aela-cream text-sm font-medium tracking-wide uppercase truncate transition-colors duration-300 group-hover:text-aela-gold">
+      <div className="p-4 flex flex-col space-y-2">
+        <h3 className="font-serif text-base md:text-lg text-warm-100 leading-snug group-hover:text-gold-400 transition-colors duration-300">
           {product.name}
         </h3>
         
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2 font-sans text-sm">
           {product.isPromo && product.originalPrice ? (
             <>
-              <span className="text-aela-gray text-sm line-through">
+              <span className="text-warm-400 line-through">
                 {formatPrice(product.originalPrice)}
               </span>
-              <span className="text-aela-gold text-sm font-semibold">
+              <span className="text-gold-400 font-medium">
                 {formatPrice(product.price)}
               </span>
             </>
           ) : (
-            <span className="text-aela-cream-dark text-sm font-semibold">
+            <span className="text-gold-400 font-medium">
               {formatPrice(product.price)}
             </span>
           )}
