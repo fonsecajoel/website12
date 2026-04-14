@@ -1,179 +1,143 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { categories, getNewProducts, getPromoProducts } from "@/lib/data";
+import { motion } from "framer-motion";
+import { categories, getNewProducts } from "@/lib/data";
 import ProductCard from "@/components/ProductCard";
 import HeroSection from "@/components/HeroSection";
-import { Truck, CreditCard, RefreshCcw, Tag } from "lucide-react";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.6, ease: "easeOut" as const }
+};
 
 export default function Home() {
   const newProducts = getNewProducts();
-  const promoProducts = getPromoProducts();
 
   return (
-    <div className="flex flex-col min-h-screen bg-aela-black text-aela-cream">
-      
+    <div className="flex flex-col min-h-screen bg-noir-950 text-warm-100">
       <HeroSection />
 
-      <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-aela-black border-b border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex overflow-x-auto hide-scrollbar gap-8 pb-6 snap-x snap-mandatory">
-            {categories.map((category) => (
-              <Link 
-                key={category.slug} 
-                href={`/produtos?category=${category.slug}`}
-                className="flex flex-col items-center gap-4 group min-w-[120px] snap-start"
-              >
-                <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-transparent group-hover:border-aela-gold transition-colors duration-500 p-1">
-                  <div className="relative w-full h-full rounded-full overflow-hidden">
-                    <Image
-                      src={category.image || "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop"}
-                      alt={category.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
-                  </div>
-                </div>
-                <span className="text-sm md:text-base font-medium tracking-widest uppercase text-aela-cream/80 group-hover:text-aela-gold transition-colors">
-                  {category.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-aela-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight lowercase text-aela-cream">
-              acabou de chegar
-            </h2>
-            <Link href="/produtos?filter=novidades" className="text-aela-gold hover:text-aela-gold-light text-sm uppercase tracking-widest font-semibold pb-1 border-b border-transparent hover:border-aela-gold transition-all hidden sm:block">
-              Ver tudo
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {newProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          
-          <div className="mt-10 flex justify-center sm:hidden">
-            <Link href="/produtos?filter=novidades" className="inline-flex justify-center items-center px-8 py-3 text-sm font-semibold border border-aela-gold text-aela-gold w-full rounded-sm uppercase tracking-wider">
-              Ver tudo
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full">
-        <div className="flex flex-col md:flex-row h-auto md:h-[60vh] min-h-[500px]">
-          <div className="w-full md:w-1/2 relative h-[300px] md:h-full">
-            <Image
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop"
-              alt="Promo Banner"
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          </div>
-          <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start p-12 md:p-24 bg-gradient-to-br from-aela-dark to-[#1a1814] border-l border-aela-gold/20">
-            <h2 className="text-5xl md:text-6xl font-extrabold text-aela-gold mb-6">
-              Até 40% OFF
-            </h2>
-            <p className="text-xl md:text-2xl text-aela-cream mb-10 font-light max-w-md text-center md:text-left">
-              Aproveite as melhores ofertas da temporada na seleção exclusiva.
-            </p>
+      <motion.section 
+        {...fadeInUp}
+        className="w-full py-24 px-8 md:px-16 bg-noir-950 relative"
+      >
+        <div className="flex gap-8 overflow-x-auto no-scrollbar">
+          {categories.map((category) => (
             <Link 
-              href="/produtos?filter=promo" 
-              className="inline-flex justify-center items-center px-10 py-4 text-base font-semibold bg-aela-cream text-aela-black hover:bg-white transition-colors duration-300 rounded-sm uppercase tracking-wider"
+              key={category.slug} 
+              href={`/produtos?category=${category.slug}`}
+              className="flex flex-col items-center gap-4 group min-w-[160px] md:min-w-[200px]"
             >
-              Ver Promoções
+              <div className="relative w-full aspect-square overflow-hidden bg-noir-800 rounded-none border border-transparent group-hover:border-gold-500 transition-colors duration-500">
+                <Image
+                  src={category.image || "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop"}
+                  alt={category.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                  unoptimized
+                />
+              </div>
+              <span className="font-serif text-warm-100 text-lg tracking-wide group-hover:text-gold-300 transition-colors duration-300">
+                {category.name}
+              </span>
             </Link>
-          </div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-aela-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight lowercase text-aela-cream">
-              aproveite o precinho
-            </h2>
-            <Link href="/produtos?filter=promo" className="text-aela-gold hover:text-aela-gold-light text-sm uppercase tracking-widest font-semibold pb-1 border-b border-transparent hover:border-aela-gold transition-all hidden sm:block">
-              Ver tudo
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {promoProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          
-          <div className="mt-10 flex justify-center sm:hidden">
-            <Link href="/produtos?filter=promo" className="inline-flex justify-center items-center px-8 py-3 text-sm font-semibold border border-aela-gold text-aela-gold w-full rounded-sm uppercase tracking-wider">
-              Ver tudo
-            </Link>
-          </div>
-        </div>
-      </section>
+      <div className="w-full max-w-[1400px] mx-auto px-8 md:px-16">
+        <div className="w-full border-t border-gold-700/30"></div>
+      </div>
 
-      <section className="w-full py-12 bg-aela-dark border-y border-aela-gold/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            <div className="flex flex-col items-center text-center space-y-3 group">
-              <Truck className="w-8 h-8 text-aela-gold group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-aela-cream/90 uppercase tracking-wide">Frete Grátis acima de R$299</span>
-            </div>
-            <div className="flex flex-col items-center text-center space-y-3 group">
-              <CreditCard className="w-8 h-8 text-aela-gold group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-aela-cream/90 uppercase tracking-wide">Até 5x sem juros</span>
-            </div>
-            <div className="flex flex-col items-center text-center space-y-3 group">
-              <RefreshCcw className="w-8 h-8 text-aela-gold group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-aela-cream/90 uppercase tracking-wide">30 dias para troca</span>
-            </div>
-            <div className="flex flex-col items-center text-center space-y-3 group">
-              <Tag className="w-8 h-8 text-aela-gold group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-aela-cream/90 uppercase tracking-wide">10% OFF na 1ª compra</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full py-24 px-4 sm:px-6 lg:px-8 bg-aela-black relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-aela-gold/30 to-transparent" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-aela-gold/30 to-transparent" />
-        
-        <div className="max-w-2xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight lowercase text-aela-cream mb-4">
-            quer ficar por dentro?
+      <motion.section 
+        {...fadeInUp}
+        className="w-full py-24 px-8 md:px-16 max-w-[1400px] mx-auto bg-noir-950"
+      >
+        <div className="flex justify-between items-end mb-12">
+          <h2 className="font-serif text-3xl md:text-4xl text-gold-300">
+            Acabaram de chegar
           </h2>
-          <p className="text-aela-cream/70 text-lg mb-10 font-light">
-            Cadastre-se e receba 10% OFF na primeira compra, além de novidades exclusivas.
+          <Link href="/produtos?filter=novidades" className="text-[11px] uppercase tracking-[0.2em] text-warm-300 hover:text-gold-400 transition-colors border-b border-warm-300/30 hover:border-gold-400 pb-0.5 hidden sm:block">
+            Ver tudo
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+          {newProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+        
+        <div className="mt-10 flex justify-center sm:hidden">
+          <Link href="/produtos?filter=novidades" className="text-[11px] uppercase tracking-[0.2em] text-warm-300 hover:text-gold-400 transition-colors border-b border-warm-300/30 hover:border-gold-400 pb-0.5">
+            Ver tudo
+          </Link>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        {...fadeInUp}
+        className="w-full relative h-[500px] md:h-[700px] flex items-center justify-center overflow-hidden"
+      >
+        <Image
+          src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop"
+          alt="Editorial"
+          fill
+          className="object-cover rounded-none opacity-60"
+          unoptimized
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-noir-950 via-noir-950/40 to-transparent"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6">
+          <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-gold-500 mb-6">
+            Seleção exclusiva
+          </span>
+          <h2 className="font-serif text-4xl md:text-6xl text-gold-300 leading-tight mb-6 max-w-2xl drop-shadow-lg">
+            Peças com história e sofisticação.
+          </h2>
+          <p className="font-sans text-sm md:text-base text-warm-200 leading-relaxed max-w-md mb-10 drop-shadow-md">
+            Cada peça da nossa coleção é selecionada pela sua qualidade ímpar, design ousado e atemporalidade.
+          </p>
+          <Link 
+            href="/produtos" 
+            className="border border-gold-500 text-gold-400 hover:bg-gold-500 hover:text-noir-950 px-10 py-4 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-500"
+          >
+            Descobrir a Coleção
+          </Link>
+        </div>
+      </motion.section>
+
+      <motion.section 
+        {...fadeInUp}
+        className="w-full py-32 px-8 bg-noir-800 border-t border-gold-700/20"
+      >
+        <div className="max-w-lg mx-auto text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-gold-300 mb-4">
+            Fique a par de tudo.
+          </h2>
+          <p className="font-sans text-sm md:text-base text-warm-300 mb-10">
+            Receba novidades exclusivas e acesso antecipado a novas coleções.
           </p>
           
-          <form className="flex flex-col sm:flex-row gap-4 w-full max-w-md mx-auto">
+          <form className="flex flex-col sm:flex-row w-full items-center justify-center gap-4 sm:gap-0">
             <input 
               type="email" 
-              placeholder="Seu melhor e-mail" 
-              className="flex-1 bg-transparent border border-white/20 focus:border-aela-gold text-aela-cream px-6 py-4 outline-none rounded-sm transition-colors placeholder:text-white/30"
+              placeholder="E-mail" 
+              className="w-full sm:max-w-[300px] border-b border-warm-500/50 focus:border-gold-400 bg-transparent text-warm-100 placeholder:text-warm-500/70 py-3 px-2 outline-none transition-colors text-sm"
               required
             />
             <button 
               type="submit"
-              className="px-8 py-4 bg-aela-gold text-aela-black font-semibold hover:bg-aela-gold-light transition-colors rounded-sm uppercase tracking-wider whitespace-nowrap"
+              className="w-full sm:w-auto sm:ml-6 bg-gold-400 text-noir-950 hover:bg-gold-300 px-8 py-3 text-[11px] uppercase tracking-[0.2em] font-bold transition-all duration-300 mt-4 sm:mt-0"
             >
-              Cadastrar
+              Subscrever
             </button>
           </form>
         </div>
-      </section>
-
+      </motion.section>
     </div>
   );
 }
