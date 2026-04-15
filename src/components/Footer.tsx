@@ -123,7 +123,7 @@ export function Footer() {
               <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Redes Sociais</h3>
               <ul className="space-y-4">
                 <li>
-                  <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  <a href="https://www.instagram.com/oneaela?igsh=Zm5lYXp3ODZqOTRx&utm_source=qr" target="_blank" rel="noreferrer" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                     Instagram
                   </a>
                 </li>
