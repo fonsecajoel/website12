@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 w-full h-full">
         <Image
           src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop"
-          alt="Vista o seu estilo"
+           alt="Vista o seu estilo de viver"
           fill
           className="object-cover object-center"
           priority
@@ -37,7 +37,7 @@ export default function HeroSection() {
           transition={{ duration: 1.2, ease: "easeOut", delay: 0 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-gold-300 leading-none mb-2"
         >
-          Vista o seu estilo.
+          Vista o seu estilo de viver.
         </motion.h1>
 
         <motion.div
