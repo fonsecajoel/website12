@@ -364,7 +364,7 @@ function Confirmation({ order }: { order: Order }) {
       )}
 
       {order.sandbox && (
-        <p className="mt-6 text-xs text-warm-500">Ambiente de testes: nenhum valor foi cobrado no cartão nem registrado em banco emissor.</p>
+        <p className="mt-6 text-xs text-warm-500">Ambiente de testes: este pagamento não é real e nenhum valor foi cobrado.</p>
       )}
       <p className="mt-6 text-sm text-warm-400">Guarde o número do pedido para acompanhar a entrega.</p>
       <Link href="/produtos" className="mt-10 inline-block border border-gold-500 px-10 py-4 text-[11px] uppercase tracking-[0.2em] text-gold-300 hover:bg-gold-400 hover:text-noir-950">Continuar comprando</Link>
