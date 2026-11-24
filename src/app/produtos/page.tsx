@@ -1,25 +1,27 @@
+import type { Metadata } from "next";
 import ProductListingClient from "@/components/ProductListingClient";
-import { products } from "@/lib/data";
+import { getProducts } from "@/lib/catalog";
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+export const metadata: Metadata = { title: "Coleção | Aela." };
 
-export default async function ProdutosPage(props: { searchParams: SearchParams }) {
-  const searchParams = await props.searchParams;
-  const category = typeof searchParams.category === "string" ? searchParams.category : undefined;
-  const filter = typeof searchParams.filter === "string" ? searchParams.filter : undefined;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+const one = (v: string | string[] | undefined): string | undefined => (typeof v === "string" ? v : undefined);
 
-  const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: "Produtos" },
-  ];
-
+export default async function ProdutosPage({ searchParams }: { searchParams: SearchParams }) {
+  const sp = await searchParams;
+  const products = await getProducts();
+  const filtro = one(sp.filtro);
+  const title = filtro === "novos" ? "Novidades" : filtro === "promo" ? "Promoções" : "Coleção";
+  const categoria = one(sp.categoria);
+  const q = one(sp.q);
   return (
     <ProductListingClient
+      key={`${categoria}-${filtro}-${q}`}
       initialProducts={products}
-      title="Todos os Produtos"
-      breadcrumbs={breadcrumbs}
-      initialCategory={category}
-      initialFilter={filter}
+      title={title}
+      initialCategory={categoria}
+      initialFilter={filtro}
+      initialQuery={q}
     />
   );
 }

@@ -1,3 +1,8 @@
+export interface ProductColor {
+  name: string;
+  hex: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -5,18 +10,26 @@ export interface Product {
   price: number;
   originalPrice?: number;
   images: string[];
-  category: "feminino" | "acessorios";
+  category: string;
   subcategory: string;
   sizes: string[];
   colors: ProductColor[];
   description: string;
+  details?: string[];
+  stock: number;
+  rating: number;
+  reviews: number;
   isNew?: boolean;
   isPromo?: boolean;
+  isFeatured?: boolean;
+  active?: boolean;
 }
 
-export interface ProductColor {
+export interface Category {
   name: string;
-  hex: string;
+  slug: string;
+  image: string;
+  tagline?: string;
 }
 
 export interface CartItem {
@@ -26,8 +39,83 @@ export interface CartItem {
   color: string;
 }
 
-export interface Category {
+export type PaymentMethod = "pix" | "debito" | "credito" | "boleto";
+
+export type OrderStatus =
+  | "aguardando_pagamento"
+  | "pago"
+  | "em_separacao"
+  | "enviado"
+  | "entregue"
+  | "cancelado";
+
+export interface Address {
+  cep: string;
+  street: string;
+  number: string;
+  complement?: string;
+  district: string;
+  city: string;
+  state: string;
+}
+
+export interface Customer {
   name: string;
-  slug: string;
+  email: string;
+  phone: string;
+  cpf: string;
+}
+
+export interface OrderItem {
+  productId: string;
+  name: string;
   image: string;
+  size: string;
+  color: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface PixPayment {
+  method: "pix";
+  payload: string;
+  qrCodeDataUrl: string;
+  expiresAt: string;
+}
+
+export interface BoletoPayment {
+  method: "boleto";
+  digitableLine: string;
+  barcode: string;
+  dueDate: string;
+}
+
+export interface CardPayment {
+  method: "credito" | "debito";
+  brand: string;
+  last4: string;
+  installments: number;
+  installmentValue: number;
+  authorizationCode: string;
+}
+
+export type PaymentResult = PixPayment | BoletoPayment | CardPayment;
+
+export interface Order {
+  id: string;
+  number: string;
+  createdAt: string;
+  status: OrderStatus;
+  customer: Customer;
+  address: Address;
+  items: OrderItem[];
+  subtotal: number;
+  discount: number;
+  shipping: number;
+  total: number;
+  paymentMethod: PaymentMethod;
+  installments: number;
+  payment: PaymentResult;
+  persisted: boolean;
+  sandbox: boolean;
 }
