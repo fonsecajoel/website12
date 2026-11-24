@@ -12,10 +12,10 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
   return (
     <section className="mx-auto w-full max-w-[1500px] px-6 py-24 md:px-16">
       <div className="mb-12 flex items-end justify-between">
-        <h2 className="font-serif text-4xl text-warm-100 md:text-6xl">
+        <h2 className="font-bold text-4xl text-warm-100 md:text-6xl">
           Compre por <span className="italic text-gold-300">categoria</span>
         </h2>
-        <span className="hidden text-[11px] uppercase tracking-[0.3em] text-warm-400 md:block">{categories.length} universos</span>
+        <span className="hidden text-[11px] uppercase tracking-[0.3em] text-warm-100 md:block">{categories.length} universos</span>
       </div>
       <div className="grid auto-rows-[220px] grid-cols-2 gap-3 md:auto-rows-[260px] md:grid-cols-4 md:gap-4">
         {categories.map((c, i) => (
@@ -39,7 +39,7 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.3em] text-gold-400">0{i + 1}</p>
-                  <h3 className="font-serif text-2xl text-warm-100 md:text-3xl">{c.name}</h3>
+                  <h3 className="font-bold text-2xl text-warm-100 md:text-3xl">{c.name}</h3>
                 </div>
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-warm-100/30 text-warm-100 transition-all duration-500 group-hover:rotate-45 group-hover:border-gold-400 group-hover:bg-gold-400 group-hover:text-noir-950">
                   <ArrowUpRight className="h-4 w-4" />

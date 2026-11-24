@@ -14,7 +14,7 @@ export function Editorial() {
 
   return (
     <section ref={ref} className="relative overflow-hidden py-32">
-      <motion.p style={{ x }} className="pointer-events-none whitespace-nowrap font-serif text-[18vw] italic leading-none text-outline opacity-30">
+      <motion.p style={{ x }} className="pointer-events-none whitespace-nowrap font-black text-[18vw] italic leading-none text-outline opacity-30">
         Sofisticação atemporal
       </motion.p>
       <div className="mx-auto -mt-[8vw] grid max-w-[1400px] grid-cols-1 items-center gap-12 px-6 md:grid-cols-12 md:px-16">
@@ -23,10 +23,10 @@ export function Editorial() {
         </motion.div>
         <div className="md:col-span-4 md:col-start-7">
           <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-gold-400">Editorial</p>
-          <h2 className="mb-6 font-serif text-4xl leading-tight text-warm-100 md:text-5xl">
+          <h2 className="mb-6 font-bold text-4xl leading-tight text-warm-100 md:text-5xl">
             Peças com história, feitas para <span className="italic text-gold-300">durar</span>.
           </h2>
-          <p className="mb-10 leading-relaxed text-warm-300">
+          <p className="mb-10 leading-relaxed text-warm-100">
             Tecidos nobres, acabamento artesanal e um olhar atento a cada detalhe. Cada peça é selecionada para acompanhar
             você em todos os momentos — do café da manhã ao jantar de gala.
           </p>

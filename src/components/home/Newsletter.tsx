@@ -17,7 +17,7 @@ export function Newsletter() {
   return (
     <section className="grain relative overflow-hidden bg-gold-400 px-6 py-28 text-noir-950">
       <div className="relative mx-auto max-w-2xl text-center">
-        <h2 className="mb-4 font-serif text-5xl leading-none md:text-7xl">Ganhe 10% off</h2>
+        <h2 className="mb-4 font-black text-5xl leading-none md:text-7xl">Ganhe 10% off</h2>
         <p className="mb-10 text-sm text-noir-950">Na primeira compra + acesso antecipado às novas coleções.</p>
         {state === "done" ? (
           <p className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-[0.2em]">

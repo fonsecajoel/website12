@@ -17,8 +17,8 @@ export function PaymentPerks() {
         {PERKS.map(({ icon: Icon, title, text }) => (
           <div key={title} className="group flex flex-col items-center gap-3 border-noir-700 px-4 py-10 text-center transition-colors hover:bg-noir-800 md:border-r last:border-r-0">
             <Icon className="h-7 w-7 text-gold-400 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" strokeWidth={1.2} />
-            <p className="font-serif text-xl text-warm-100">{title}</p>
-            <p className="text-xs text-warm-400">{text}</p>
+            <p className="font-bold text-xl text-warm-100">{title}</p>
+            <p className="text-xs text-warm-100">{text}</p>
           </div>
         ))}
       </div>

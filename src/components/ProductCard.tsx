@@ -67,7 +67,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
         </button>
 
         <div className="absolute inset-x-0 bottom-0 translate-y-full bg-noir-950/90 p-3 backdrop-blur transition-transform duration-500 group-hover:translate-y-0">
-          <p className="mb-2 text-center text-[9px] uppercase tracking-[0.25em] text-warm-400">Adicionar rápido</p>
+          <p className="mb-2 text-center text-[9px] uppercase tracking-[0.25em] text-warm-100">Adicionar rápido</p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {product.sizes.map((size) => (
               <button
@@ -84,18 +84,18 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
 
       <div className="mt-4 flex flex-col gap-1">
         <div className="flex items-start justify-between gap-2">
-          <Link href={`/produto/${product.slug}`} className="font-serif text-lg leading-tight text-warm-100 transition-colors hover:text-gold-300">
+          <Link href={`/produto/${product.slug}`} className="font-bold text-lg leading-tight text-warm-100 transition-colors hover:text-gold-300">
             {product.name}
           </Link>
-          <span className="flex shrink-0 items-center gap-1 text-[11px] text-warm-400">
+          <span className="flex shrink-0 items-center gap-1 text-[11px] text-warm-100">
             <Star className="h-3 w-3 fill-gold-400 text-gold-400" /> {product.rating.toFixed(1)}
           </span>
         </div>
         <div className="flex items-baseline gap-2">
           <span className="text-base font-medium text-gold-300">{formatPrice(product.price)}</span>
-          {product.originalPrice && <span className="text-xs text-warm-500 line-through">{formatPrice(product.originalPrice)}</span>}
+          {product.originalPrice && <span className="text-xs text-warm-100 line-through">{formatPrice(product.originalPrice)}</span>}
         </div>
-        <p className="text-[11px] text-warm-400">
+        <p className="text-[11px] text-warm-100">
           {inst.count > 1 ? `${inst.count}x de ${formatPrice(inst.value)} sem juros` : "à vista"} ·{" "}
           <span className="text-gold-400">{formatPrice(pixPrice(product.price))} no Pix</span>
         </p>

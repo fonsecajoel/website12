@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 
-const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400", "500", "600"], style: ["normal", "italic"], variable: "--font-cormorant" });
-const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
+// Brand Guide Aela: Lato Regular (400), Bold (700) e Black (900)
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"], style: ["normal", "italic"], variable: "--font-lato" });
 
 export const metadata: Metadata = {
   title: "Aela. | Moda Feminina de Luxo",
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${serif.variable} ${sans.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${lato.variable} h-full antialiased`}>
         <body className="min-h-full flex flex-col bg-noir-950 text-warm-100">
         <AnnouncementBar />
         <Header />

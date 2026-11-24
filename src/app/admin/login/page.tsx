@@ -26,14 +26,14 @@ export default function AdminLogin() {
   }
 
   if (!isSupabaseConfigured()) {
-    return <p className="py-32 text-center text-warm-300">Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY no .env.local.</p>;
+    return <p className="py-32 text-center text-warm-100">Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY no .env.local.</p>;
   }
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-6">
       <form onSubmit={submit} className="flex w-full max-w-sm flex-col gap-4 border border-noir-700 bg-noir-900 p-8">
         <Lock className="mx-auto h-8 w-8 text-gold-400" strokeWidth={1.2} />
-        <h1 className="text-center font-serif text-3xl">Painel Aela.</h1>
+        <h1 className="text-center font-bold text-3xl">Painel Aela.</h1>
         <input name="email" type="email" required placeholder="E-mail" autoComplete="email" className="border border-noir-600 bg-noir-950 px-4 py-3 outline-none focus:border-gold-400" />
         <input name="password" type="password" required placeholder="Senha" autoComplete="current-password" className="border border-noir-600 bg-noir-950 px-4 py-3 outline-none focus:border-gold-400" />
         {error && <p className="text-sm text-danger">{error}</p>}

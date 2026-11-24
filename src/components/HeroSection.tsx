@@ -37,7 +37,7 @@ export default function HeroSection() {
             <Sparkles className="h-3.5 w-3.5" /> Coleção Verão 2026
           </motion.span>
 
-          <h1 className="font-serif font-light leading-[0.88] tracking-tight text-[clamp(3.5rem,8vw,8.5rem)]">
+          <h1 className="font-bold leading-[0.88] tracking-tight text-[clamp(3.5rem,8vw,8.5rem)]">
             {["Vista o seu", "estilo", "de viver."].map((line, i) => (
               <span key={line} className="block overflow-hidden pb-2">
                 <motion.span
@@ -56,7 +56,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 1 }}
-            className="mt-8 max-w-md text-base leading-relaxed text-warm-300"
+            className="mt-8 max-w-md text-base leading-relaxed text-warm-100"
           >
             Peças de alfaiataria, festa e dia a dia com acabamento de ateliê. Edição limitada, entrega para todo o Brasil.
           </motion.p>
@@ -95,8 +95,8 @@ export default function HeroSection() {
               ["30d", "troca grátis"],
             ].map(([big, small]) => (
               <div key={big} className="px-4 first:pl-0">
-                <dt className="font-serif text-3xl text-gold-300">{big}</dt>
-                <dd className="text-[10px] uppercase tracking-[0.2em] text-warm-400">{small}</dd>
+                <dt className="font-black text-3xl text-gold-300">{big}</dt>
+                <dd className="text-[10px] uppercase tracking-[0.2em] text-warm-100">{small}</dd>
               </div>
             ))}
           </motion.dl>
@@ -150,7 +150,7 @@ export default function HeroSection() {
                 </text>
               </svg>
             </motion.div>
-            <span className="absolute inset-0 flex items-center justify-center font-serif text-3xl italic text-noir-950">26</span>
+            <span className="absolute inset-0 flex items-center justify-center font-black text-3xl italic text-noir-950">26</span>
           </motion.div>
 
           <motion.div
@@ -162,7 +162,7 @@ export default function HeroSection() {
             <QrCode className="h-6 w-6 text-gold-400" strokeWidth={1.3} />
             <div>
               <p className="text-xs font-semibold text-warm-100">5% off no Pix</p>
-              <p className="text-[10px] text-warm-400">Aprovação na hora</p>
+              <p className="text-[10px] text-warm-100">Aprovação na hora</p>
             </div>
           </motion.div>
         </div>

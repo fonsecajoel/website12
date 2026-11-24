@@ -8,8 +8,10 @@
    *   Marrom Café  #472514  → cafe-500  (superfícies de marca)
    *   Caramelo     #b47a32  → gold-400  (acento)
    *   Off White    #eedebd  → warm-100  (texto)
-   * Os outros tons são misturas entre estas quatro cores, para bordas,
-   * superfícies e hierarquia de texto. Não introduzir matizes fora da paleta.
+   * Texto: sempre Off White (Preto Suave sobre fundos claros/Caramelo) ou
+   * Caramelo nos acentos — sem cinzentos intermédios.
+   * Os outros tons são misturas entre estas quatro cores, para bordas e
+   * superfícies. Não introduzir matizes fora da paleta.
    */
 
   /* Preto Suave — base; passos mais claros misturam com Off White */
@@ -30,12 +32,8 @@
   --color-gold-600: #8b5a27;
   --color-gold-700: #734720;
 
-  /* Off White — hierarquia de texto; passos mais escuros misturam com Preto Suave */
+  /* Off White — cor única do texto sobre fundos escuros */
   --color-warm-100: #eedebd;
-  --color-warm-200: #dacbad;
-  --color-warm-300: #bdb097;
-  --color-warm-400: #a99d88;
-  --color-warm-500: #948a78;
 
   /* Marrom Café */
   --color-cafe-500: #472514;
@@ -69,17 +67,13 @@
   --color-gold-700: var(--color-gold-700);
 
   --color-warm-100: var(--color-warm-100);
-  --color-warm-200: var(--color-warm-200);
-  --color-warm-300: var(--color-warm-300);
-  --color-warm-400: var(--color-warm-400);
-  --color-warm-500: var(--color-warm-500);
 
   --color-cafe-500: var(--color-cafe-500);
 
   --color-danger: var(--color-danger);
 
-  --font-serif: var(--font-cormorant), 'Georgia', serif;
-  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  /* Tipografia única da marca: Lato (pesos 400, 700 e 900, carregados em layout.tsx) */
+  --font-sans: var(--font-lato), system-ui, sans-serif;
 }
 
 body {
@@ -125,11 +119,6 @@ html {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* Serif heading utility */
-.font-serif {
-  font-family: var(--font-serif);
 }
 
 /* ===== Motion & efeitos ===== */

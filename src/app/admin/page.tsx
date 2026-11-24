@@ -35,8 +35,8 @@ export default async function AdminPage() {
   const supabase = await createSessionClient();
   if (!supabase) {
     return (
-      <div className="mx-auto max-w-2xl px-6 py-24 text-warm-300">
-        <h1 className="mb-4 font-serif text-4xl text-warm-100">Painel indisponível</h1>
+      <div className="mx-auto max-w-2xl px-6 py-24 text-warm-100">
+        <h1 className="mb-4 font-bold text-4xl text-warm-100">Painel indisponível</h1>
         <p>Defina as variáveis do Supabase no <code>.env.local</code> (ver README).</p>
       </div>
     );
@@ -46,8 +46,8 @@ export default async function AdminPage() {
   const { data: isAdmin } = await supabase.rpc("is_admin");
   if (!isAdmin) {
     return (
-      <div className="mx-auto max-w-2xl px-6 py-24 text-warm-300">
-        <h1 className="mb-4 font-serif text-4xl text-warm-100">Sem acesso</h1>
+      <div className="mx-auto max-w-2xl px-6 py-24 text-warm-100">
+        <h1 className="mb-4 font-bold text-4xl text-warm-100">Sem acesso</h1>
         <p className="mb-4">Adicione este utilizador como administrador no SQL Editor do Supabase:</p>
         <pre className="overflow-x-auto bg-noir-900 p-4 text-xs">insert into public.admins (user_id) values (&apos;{auth.user.id}&apos;);</pre>
       </div>
@@ -76,33 +76,33 @@ export default async function AdminPage() {
   return (
     <div className="mx-auto max-w-[1500px] px-6 py-12 md:px-12">
       <div className="mb-10 flex items-center justify-between">
-        <h1 className="font-serif text-4xl md:text-5xl">Painel</h1>
-        <form action={signOut}><button className="text-[11px] uppercase tracking-[0.2em] text-warm-400 hover:text-gold-400">Sair</button></form>
+        <h1 className="font-bold text-4xl md:text-5xl">Painel</h1>
+        <form action={signOut}><button className="text-[11px] uppercase tracking-[0.2em] text-warm-100 hover:text-gold-400">Sair</button></form>
       </div>
 
       <div className="mb-14 grid grid-cols-2 gap-3 md:grid-cols-6">
         {kpis.map(([label, value]) => (
           <div key={label} className="border border-noir-700 bg-noir-900 p-5">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-warm-400">{label}</p>
-            <p className="mt-2 font-serif text-2xl text-gold-300">{value}</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-warm-100">{label}</p>
+            <p className="mt-2 font-bold text-2xl text-gold-300">{value}</p>
           </div>
         ))}
       </div>
 
       <section className="mb-16">
-        <h2 className="mb-4 font-serif text-3xl">Pedidos</h2>
+        <h2 className="mb-4 font-bold text-3xl">Pedidos</h2>
         <div className="overflow-x-auto border border-noir-700">
           <table className="w-full text-left text-sm">
-            <thead className="bg-noir-900 text-[10px] uppercase tracking-[0.2em] text-warm-400">
+            <thead className="bg-noir-900 text-[10px] uppercase tracking-[0.2em] text-warm-100">
               <tr><th className="p-3">Nº</th><th className="p-3">Data</th><th className="p-3">Cliente</th><th className="p-3">Pagamento</th><th className="p-3">Total</th><th className="p-3">Estado</th></tr>
             </thead>
             <tbody>
-              {list.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-warm-500">Ainda sem pedidos.</td></tr>}
+              {list.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-warm-100">Ainda sem pedidos.</td></tr>}
               {list.map((o) => (
                 <tr key={o.id} className="border-t border-noir-700">
                   <td className="p-3 font-mono text-xs">{o.number}</td>
-                  <td className="p-3 text-warm-400">{new Date(o.created_at).toLocaleString("pt-BR")}</td>
-                  <td className="p-3">{o.customer.name}<br /><span className="text-xs text-warm-500">{o.customer.email}</span></td>
+                  <td className="p-3 text-warm-100">{new Date(o.created_at).toLocaleString("pt-BR")}</td>
+                  <td className="p-3">{o.customer.name}<br /><span className="text-xs text-warm-100">{o.customer.email}</span></td>
                   <td className="p-3">{METHOD_LABEL[o.payment_method]}{o.installments > 1 ? ` ${o.installments}x` : ""}</td>
                   <td className="p-3 text-gold-300">{formatPrice(Number(o.total))}</td>
                   <td className="p-3">
@@ -122,18 +122,18 @@ export default async function AdminPage() {
       </section>
 
       <section className="mb-16">
-        <h2 className="mb-4 font-serif text-3xl">Produtos</h2>
+        <h2 className="mb-4 font-bold text-3xl">Produtos</h2>
         <div className="overflow-x-auto border border-noir-700">
           <table className="w-full text-left text-sm">
-            <thead className="bg-noir-900 text-[10px] uppercase tracking-[0.2em] text-warm-400">
+            <thead className="bg-noir-900 text-[10px] uppercase tracking-[0.2em] text-warm-100">
               <tr><th className="p-3">Produto</th><th className="p-3">Categoria</th><th className="p-3">Preço</th><th className="p-3">Stock</th><th className="p-3">Ativo</th><th className="p-3" /></tr>
             </thead>
             <tbody>
-              {products.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-warm-500">Sem produtos — corra supabase/seed.sql.</td></tr>}
+              {products.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-warm-100">Sem produtos — corra supabase/seed.sql.</td></tr>}
               {products.map((p) => (
                 <tr key={p.id} className="border-t border-noir-700">
                   <td className="p-3">{p.name}</td>
-                  <td className="p-3 capitalize text-warm-400">{p.subcategory}</td>
+                  <td className="p-3 capitalize text-warm-100">{p.subcategory}</td>
                   <td className="p-3" colSpan={4}>
                     <form action={updateProduct} className="flex items-center gap-3">
                       <input type="hidden" name="id" value={p.id} />
@@ -151,7 +151,7 @@ export default async function AdminPage() {
       </section>
 
       <section>
-        <h2 className="mb-4 font-serif text-3xl">Novo produto</h2>
+        <h2 className="mb-4 font-bold text-3xl">Novo produto</h2>
         <form action={createProduct} className="grid gap-3 border border-noir-700 bg-noir-900 p-6 md:grid-cols-4">
           <input name="name" required placeholder="Nome" className={`${input} md:col-span-2`} />
           <input name="subcategory" required placeholder="Categoria (ex: vestidos)" className={input} />

@@ -22,16 +22,16 @@ export function ProductShowcase({ products }: { products: Product[] }) {
       <div className="mb-14 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <div>
           <p className="mb-3 text-[11px] uppercase tracking-[0.35em] text-gold-400">A seleção</p>
-          <h2 className="font-serif text-5xl leading-none text-warm-100 md:text-7xl">
+          <h2 className="font-bold text-5xl leading-none text-warm-100 md:text-6xl">
             Peças que <span className="italic text-gold-300">falam</span> por si.
           </h2>
         </div>
-        <div className="relative flex gap-1 rounded-full border border-noir-600 p-1">
+        <div className="no-scrollbar relative flex max-w-full shrink-0 gap-1 overflow-x-auto rounded-full border border-noir-600 p-1">
           {TABS.map((t) => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`relative z-10 rounded-full px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] transition-colors ${tab === t.key ? "text-noir-950" : "text-warm-300 hover:text-warm-100"}`}
+              className={`relative z-10 whitespace-nowrap rounded-full px-2.5 py-2.5 text-[10px] uppercase tracking-[0.1em] transition-colors sm:px-5 sm:text-[11px] sm:tracking-[0.2em] ${tab === t.key ? "text-noir-950" : "text-warm-100 hover:text-gold-400"}`}
             >
               {tab === t.key && (
                 <motion.span layoutId="tab-pill" className="absolute inset-0 -z-10 rounded-full bg-gold-400" transition={{ type: "spring", bounce: 0.25, duration: 0.6 }} />

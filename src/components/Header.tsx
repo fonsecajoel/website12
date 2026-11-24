@@ -63,7 +63,7 @@ export function Header() {
           
           <div className="flex-1 lg:hidden">
             <button
-              className="text-warm-300 hover:text-gold-400 transition-colors p-2 -ml-2"
+              className="text-warm-100 hover:text-gold-400 transition-colors p-2 -ml-2"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Abrir menu"
             >
@@ -96,11 +96,11 @@ export function Header() {
                   name="q"
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-1 placeholder:text-warm-500 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
+                  className="w-full bg-transparent border-b border-noir-700 text-warm-100 text-xs uppercase tracking-[0.2em] px-0 py-1 placeholder:text-warm-100/60 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
                 /></form>
               </div>
               <button 
-                className="text-warm-300 hover:text-gold-400 transition-colors p-2" 
+                className="text-warm-100 hover:text-gold-400 transition-colors p-2" 
                 aria-label="Buscar"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
               >
@@ -108,17 +108,17 @@ export function Header() {
               </button>
             </div>
 
-            <button className="lg:hidden text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Buscar" onClick={() => setIsMobileMenuOpen(true)}>
+            <button className="lg:hidden text-warm-100 hover:text-gold-400 transition-colors p-2" aria-label="Buscar" onClick={() => setIsMobileMenuOpen(true)}>
               <Search strokeWidth={1.5} className="w-5 h-5" />
             </button>
 
-            <Link href="/favoritos" className="relative hidden sm:flex items-center justify-center text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Favoritos">
+            <Link href="/favoritos" className="relative hidden sm:flex items-center justify-center text-warm-100 hover:text-gold-400 transition-colors p-2" aria-label="Favoritos">
               <Heart strokeWidth={1.5} className="w-5 h-5" />
               {mounted && wishCount > 0 && <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-gold-400 text-noir-950 text-[9px] font-bold flex items-center justify-center">{wishCount}</span>}
             </Link>
 
             <button 
-              className="text-warm-300 hover:text-gold-400 transition-colors relative p-2" 
+              className="text-warm-100 hover:text-gold-400 transition-colors relative p-2" 
               aria-label="Carrinho"
               onClick={openCart}
             >
@@ -136,7 +136,7 @@ export function Header() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-xs uppercase tracking-[0.2em] font-medium font-sans text-warm-200 hover:text-gold-400 transition-colors duration-300 relative group"
+              className="text-xs uppercase tracking-[0.2em] font-medium font-sans text-warm-100 hover:text-gold-400 transition-colors duration-300 relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold-400 group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out" />
@@ -161,7 +161,7 @@ export function Header() {
             <Image src={logo} alt="Aela." width={110} height={36} className="w-28 h-auto" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-warm-300 hover:text-gold-400 transition-colors p-2 -mr-2"
+              className="text-warm-100 hover:text-gold-400 transition-colors p-2 -mr-2"
               aria-label="Fechar menu"
             >
               <X strokeWidth={1.5} className="w-6 h-6" />
@@ -175,9 +175,9 @@ export function Header() {
                   name="q"
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-2 placeholder:text-warm-500 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
+                  className="w-full bg-transparent border-b border-noir-700 text-warm-100 text-xs uppercase tracking-[0.2em] px-0 py-2 placeholder:text-warm-100/60 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
                 />
-                <Search strokeWidth={1.5} className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-300" />
+                <Search strokeWidth={1.5} className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-100" />
               </form>
 
               <nav className="flex flex-col space-y-8">
@@ -185,7 +185,7 @@ export function Header() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-xs uppercase tracking-[0.2em] font-medium font-sans text-warm-200 hover:text-gold-400 transition-colors duration-300"
+                    className="text-xs uppercase tracking-[0.2em] font-medium font-sans text-warm-100 hover:text-gold-400 transition-colors duration-300"
                     style={{
                       transitionDelay: isMobileMenuOpen ? `${index * 40 + 100}ms` : "0ms",
                       opacity: isMobileMenuOpen ? 1 : 0,
@@ -203,7 +203,7 @@ export function Header() {
             <div className="mt-auto p-6 border-t border-noir-700 bg-noir-950/50">
               <Link 
                 href="/favoritos" 
-                className="flex items-center space-x-3 text-warm-300 hover:text-gold-400 transition-colors duration-300"
+                className="flex items-center space-x-3 text-warm-100 hover:text-gold-400 transition-colors duration-300"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Heart strokeWidth={1.5} className="w-5 h-5" />

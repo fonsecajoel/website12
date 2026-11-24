@@ -25,14 +25,14 @@ const METHODS: { id: PaymentMethod; label: string; hint: string; icon: typeof Qr
 function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-[10px] uppercase tracking-[0.2em] text-warm-400">{label}</span>
+      <span className="text-[10px] uppercase tracking-[0.2em] text-warm-100">{label}</span>
       {children}
       {error && <span className="text-xs text-danger">{error}</span>}
     </label>
   );
 }
 
-const inputCls = "border border-noir-600 bg-noir-900 px-4 py-3.5 text-warm-100 outline-none transition-colors placeholder:text-warm-500 focus:border-gold-400";
+const inputCls = "border border-noir-600 bg-noir-900 px-4 py-3.5 text-warm-100 outline-none transition-colors placeholder:text-warm-100/60 focus:border-gold-400";
 
 export function CheckoutClient() {
   const hydrated = useHydrated();
@@ -55,7 +55,7 @@ export function CheckoutClient() {
   if (items.length === 0) {
     return (
       <div className="flex min-h-[70vh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <h1 className="font-serif text-4xl">Sua sacola está vazia</h1>
+        <h1 className="font-bold text-4xl">Sua sacola está vazia</h1>
         <Link href="/produtos" className="bg-gold-400 px-10 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-noir-950">Explorar coleção</Link>
       </div>
     );
@@ -146,18 +146,18 @@ export function CheckoutClient() {
   return (
     <div className="mx-auto max-w-[1300px] px-6 pb-24 pt-12 md:px-12">
       <div className="mb-12 flex items-center justify-between">
-        <h1 className="font-serif text-4xl md:text-5xl">Finalizar compra</h1>
-        <span className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-warm-400"><Lock className="h-4 w-4 text-gold-400" /> Ambiente seguro</span>
+        <h1 className="font-bold text-4xl md:text-5xl">Finalizar compra</h1>
+        <span className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-warm-100"><Lock className="h-4 w-4 text-gold-400" /> Ambiente seguro</span>
       </div>
 
       <div className="mb-12 flex items-center">
         {STEPS.map((label, i) => (
           <div key={label} className="flex flex-1 items-center last:flex-none">
             <button onClick={() => i < step && setStep(i)} className="flex items-center gap-3">
-              <span className={`flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-all duration-500 ${i < step ? "border-gold-400 bg-gold-400 text-noir-950" : i === step ? "border-gold-400 text-gold-300" : "border-noir-600 text-warm-500"}`}>
+              <span className={`flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-all duration-500 ${i < step ? "border-gold-400 bg-gold-400 text-noir-950" : i === step ? "border-gold-400 text-gold-300" : "border-noir-600 text-warm-100"}`}>
                 {i < step ? <Check className="h-4 w-4" /> : i + 1}
               </span>
-              <span className={`hidden text-[11px] uppercase tracking-[0.2em] sm:block ${i <= step ? "text-warm-100" : "text-warm-500"}`}>{label}</span>
+              <span className="hidden text-[11px] uppercase tracking-[0.2em] text-warm-100 sm:block">{label}</span>
             </button>
             {i < STEPS.length - 1 && (
               <div className="mx-4 h-px flex-1 bg-noir-700">
@@ -205,10 +205,10 @@ export function CheckoutClient() {
                   <div className="grid gap-3 sm:grid-cols-2">
                     {METHODS.map(({ id, label, hint, icon: Icon }) => (
                       <button key={id} onClick={() => { setMethod(id); setErrors({}); }} className={`relative flex items-center gap-4 border p-5 text-left transition-all duration-300 ${method === id ? "border-gold-400 bg-gold-400/5" : "border-noir-600 hover:border-noir-500"}`}>
-                        <Icon className={`h-6 w-6 shrink-0 ${method === id ? "text-gold-400" : "text-warm-400"}`} strokeWidth={1.4} />
+                        <Icon className={`h-6 w-6 shrink-0 ${method === id ? "text-gold-400" : "text-warm-100"}`} strokeWidth={1.4} />
                         <span>
                           <span className="block text-sm text-warm-100">{label}</span>
-                          <span className="block text-xs text-warm-400">{hint}</span>
+                          <span className="block text-xs text-warm-100">{hint}</span>
                         </span>
                         {method === id && <motion.span layoutId="method-check" className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-gold-400"><Check className="h-3 w-3 text-noir-950" /></motion.span>}
                       </button>
@@ -218,13 +218,13 @@ export function CheckoutClient() {
                   <AnimatePresence mode="wait">
                     <motion.div key={method} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="border border-noir-700 bg-noir-900 p-6">
                       {method === "pix" && (
-                        <p className="text-sm leading-relaxed text-warm-300">
+                        <p className="text-sm leading-relaxed text-warm-100">
                           Ao confirmar, geramos um <strong className="text-warm-100">QR Code Pix</strong> e o código copia-e-cola. Você paga{" "}
                           <strong className="text-gold-300">{formatPrice(pixPrice(gross))}</strong> (economia de {formatPrice(gross - pixPrice(gross))}). O código expira em {STORE.pixExpiresMinutes} minutos.
                         </p>
                       )}
                       {method === "boleto" && (
-                        <p className="text-sm leading-relaxed text-warm-300">
+                        <p className="text-sm leading-relaxed text-warm-100">
                           Boleto à vista de <strong className="text-warm-100">{formatPrice(gross)}</strong> com vencimento em {STORE.boletoDueDays} dias úteis. O pedido é enviado após a compensação (até 2 dias úteis).
                         </p>
                       )}
@@ -264,7 +264,7 @@ export function CheckoutClient() {
 
           <div className="mt-10 flex items-center justify-between">
             {step > 0 ? (
-              <button onClick={() => setStep((s) => s - 1)} className="flex items-center gap-1 text-[11px] uppercase tracking-[0.2em] text-warm-400 hover:text-warm-100"><ChevronLeft className="h-4 w-4" /> Voltar</button>
+              <button onClick={() => setStep((s) => s - 1)} className="flex items-center gap-1 text-[11px] uppercase tracking-[0.2em] text-warm-100 hover:text-gold-400"><ChevronLeft className="h-4 w-4" /> Voltar</button>
             ) : <span />}
             {step < 2 ? (
               <button onClick={next} className="bg-gold-400 px-12 py-4 text-[11px] font-bold uppercase tracking-[0.25em] text-noir-950 hover:bg-gold-200">Continuar</button>
@@ -279,7 +279,7 @@ export function CheckoutClient() {
 
         <aside className="lg:col-span-5">
           <div className="sticky top-36 border border-noir-700 bg-noir-900 p-6">
-            <h2 className="mb-6 font-serif text-2xl">Resumo</h2>
+            <h2 className="mb-6 font-bold text-2xl">Resumo</h2>
             <ul className="mb-6 flex max-h-[40vh] flex-col gap-4 overflow-y-auto">
               {items.map((i) => (
                 <li key={`${i.product.id}-${i.size}-${i.color}`} className="flex gap-4">
@@ -289,22 +289,22 @@ export function CheckoutClient() {
                   </div>
                   <div className="flex-1 text-sm">
                     <p className="text-warm-100">{i.product.name}</p>
-                    <p className="text-xs text-warm-400">{i.color} · {i.size}</p>
+                    <p className="text-xs text-warm-100">{i.color} · {i.size}</p>
                   </div>
-                  <span className="text-sm text-warm-200">{formatPrice(i.product.price * i.quantity)}</span>
+                  <span className="text-sm text-warm-100">{formatPrice(i.product.price * i.quantity)}</span>
                 </li>
               ))}
             </ul>
             <dl className="flex flex-col gap-2 border-t border-noir-700 pt-4 text-sm">
-              <div className="flex justify-between text-warm-400"><dt>Subtotal</dt><dd className="text-warm-100">{formatPrice(subtotal)}</dd></div>
-              <div className="flex justify-between text-warm-400"><dt>Frete</dt><dd className={shipping === 0 ? "text-gold-400" : "text-warm-100"}>{shipping === 0 ? "Grátis" : formatPrice(shipping)}</dd></div>
+              <div className="flex justify-between text-warm-100"><dt>Subtotal</dt><dd className="text-warm-100">{formatPrice(subtotal)}</dd></div>
+              <div className="flex justify-between text-warm-100"><dt>Frete</dt><dd className={shipping === 0 ? "text-gold-400" : "text-warm-100"}>{shipping === 0 ? "Grátis" : formatPrice(shipping)}</dd></div>
               {method === "pix" && <div className="flex justify-between text-gold-400"><dt>Desconto Pix</dt><dd>-{formatPrice(gross - total)}</dd></div>}
             </dl>
             <div className="mt-4 flex items-end justify-between border-t border-noir-700 pt-4">
-              <span className="text-[11px] uppercase tracking-[0.25em] text-warm-400">Total</span>
-              <motion.span key={total} initial={{ scale: 1.15, color: "var(--color-gold-100)" }} animate={{ scale: 1, color: "var(--color-gold-300)" }} className="font-serif text-3xl">{formatPrice(total)}</motion.span>
+              <span className="text-[11px] uppercase tracking-[0.25em] text-warm-100">Total</span>
+              <motion.span key={total} initial={{ scale: 1.15, color: "var(--color-gold-100)" }} animate={{ scale: 1, color: "var(--color-gold-300)" }} className="font-bold text-3xl">{formatPrice(total)}</motion.span>
             </div>
-            {method === "credito" && installments > 1 && <p className="mt-1 text-right text-xs text-warm-400">{installments}x de {formatPrice(total / installments)} sem juros</p>}
+            {method === "credito" && installments > 1 && <p className="mt-1 text-right text-xs text-warm-100">{installments}x de {formatPrice(total / installments)} sem juros</p>}
           </div>
         </aside>
       </div>
@@ -325,30 +325,30 @@ function Confirmation({ order }: { order: Order }) {
       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }} className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-gold-400">
         <Check className="h-10 w-10 text-noir-950" />
       </motion.div>
-      <h1 className="mb-2 font-serif text-4xl md:text-5xl">
+      <h1 className="mb-2 font-bold text-4xl md:text-5xl">
         {p.method === "pix" || p.method === "boleto" ? "Pedido reservado!" : "Pagamento aprovado!"}
       </h1>
-      <p className="mb-10 text-warm-400">Pedido <strong className="text-warm-100">#{order.number}</strong> · {formatPrice(order.total)}</p>
+      <p className="mb-10 text-warm-100">Pedido <strong className="text-warm-100">#{order.number}</strong> · {formatPrice(order.total)}</p>
 
       {p.method === "pix" && (
         <div className="border border-noir-700 bg-noir-900 p-8">
-          <p className="mb-6 text-sm text-warm-300">Escaneie o QR Code no app do seu banco ou use o Pix copia-e-cola.</p>
+          <p className="mb-6 text-sm text-warm-100">Escaneie o QR Code no app do seu banco ou use o Pix copia-e-cola.</p>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={p.qrCodeDataUrl} alt="QR Code Pix" className="mx-auto mb-6 h-60 w-60 bg-white p-2" />
           <div className="flex gap-2">
-            <input readOnly value={p.payload} className="flex-1 truncate border border-noir-600 bg-noir-950 px-3 py-3 text-xs text-warm-300" />
+            <input readOnly value={p.payload} className="flex-1 truncate border border-noir-600 bg-noir-950 px-3 py-3 text-xs text-warm-100" />
             <button onClick={() => copy(p.payload)} className="flex items-center gap-2 bg-gold-400 px-4 text-[11px] font-bold uppercase tracking-[0.15em] text-noir-950">
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />} {copied ? "Copiado" : "Copiar"}
             </button>
           </div>
-          <p className="mt-4 text-xs text-warm-500">Expira às {new Date(p.expiresAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</p>
+          <p className="mt-4 text-xs text-warm-100">Expira às {new Date(p.expiresAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</p>
         </div>
       )}
 
       {p.method === "boleto" && (
         <div className="border border-noir-700 bg-noir-900 p-8">
           <Barcode className="mx-auto mb-4 h-12 w-12 text-gold-400" strokeWidth={1} />
-          <p className="mb-4 text-sm text-warm-300">Vencimento: {new Date(p.dueDate).toLocaleDateString("pt-BR")}</p>
+          <p className="mb-4 text-sm text-warm-100">Vencimento: {new Date(p.dueDate).toLocaleDateString("pt-BR")}</p>
           <p className="mb-4 break-all border border-noir-600 bg-noir-950 p-4 font-mono text-sm text-warm-100">{p.digitableLine}</p>
           <button onClick={() => copy(p.digitableLine.replace(/\D/g, ""))} className="inline-flex items-center gap-2 bg-gold-400 px-6 py-3 text-[11px] font-bold uppercase tracking-[0.15em] text-noir-950">
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />} {copied ? "Copiado" : "Copiar linha digitável"}
@@ -357,16 +357,16 @@ function Confirmation({ order }: { order: Order }) {
       )}
 
       {(p.method === "credito" || p.method === "debito") && (
-        <div className="border border-noir-700 bg-noir-900 p-8 text-sm text-warm-300">
+        <div className="border border-noir-700 bg-noir-900 p-8 text-sm text-warm-100">
           {p.brand} final {p.last4} · {p.method === "credito" ? `${p.installments}x de ${formatPrice(p.installmentValue)} sem juros` : "Débito à vista"}
-          <p className="mt-2 text-xs text-warm-500">Autorização {p.authorizationCode}</p>
+          <p className="mt-2 text-xs text-warm-100">Autorização {p.authorizationCode}</p>
         </div>
       )}
 
       {order.sandbox && (
-        <p className="mt-6 text-xs text-warm-500">Ambiente de testes: este pagamento não é real e nenhum valor foi cobrado.</p>
+        <p className="mt-6 text-xs text-warm-100">Ambiente de testes: este pagamento não é real e nenhum valor foi cobrado.</p>
       )}
-      <p className="mt-6 text-sm text-warm-400">Guarde o número do pedido para acompanhar a entrega.</p>
+      <p className="mt-6 text-sm text-warm-100">Guarde o número do pedido para acompanhar a entrega.</p>
       <Link href="/produtos" className="mt-10 inline-block border border-gold-500 px-10 py-4 text-[11px] uppercase tracking-[0.2em] text-gold-300 hover:bg-gold-400 hover:text-noir-950">Continuar comprando</Link>
     </div>
   );

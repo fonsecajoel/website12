@@ -9,7 +9,7 @@ const QUOTES = [
 export function Testimonials() {
   return (
     <section className="mx-auto max-w-[1400px] px-6 py-28 md:px-16">
-      <h2 className="mb-16 text-center font-serif text-4xl text-warm-100 md:text-6xl">
+      <h2 className="mb-16 text-center font-bold text-4xl text-warm-100 md:text-6xl">
         Quem veste, <span className="italic text-gold-300">aprova</span>.
       </h2>
       <div className="grid gap-6 md:grid-cols-3">
@@ -20,8 +20,8 @@ export function Testimonials() {
                 <Star key={i} className="h-4 w-4 fill-gold-400 text-gold-400" />
               ))}
             </div>
-            <blockquote className="font-serif text-2xl leading-snug text-warm-100">“{q.text}”</blockquote>
-            <figcaption className="mt-auto text-[11px] uppercase tracking-[0.25em] text-warm-400">
+            <blockquote className="text-2xl leading-snug text-warm-100">“{q.text}”</blockquote>
+            <figcaption className="mt-auto text-[11px] uppercase tracking-[0.25em] text-warm-100">
               {q.name} — {q.city}
             </figcaption>
           </figure>

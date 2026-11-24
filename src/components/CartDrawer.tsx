@@ -52,7 +52,7 @@ export function CartDrawer() {
         <header className="flex items-center justify-between p-6 border-b border-noir-700">
           <div className="flex items-center gap-3">
             <ShoppingBag className="w-5 h-5 text-gold-300" />
-            <h2 className="text-xl text-gold-300 font-serif font-medium tracking-widest uppercase">
+            <h2 className="text-xl text-gold-300 font-bold tracking-widest uppercase">
               Sacola
             </h2>
             <span className="bg-gold-400 text-noir-950 text-xs font-bold px-2.5 py-0.5 rounded-full ml-1">
@@ -61,7 +61,7 @@ export function CartDrawer() {
           </div>
           <button
             onClick={close}
-            className="text-warm-400 hover:text-gold-400 transition-colors p-2 -mr-2"
+            className="text-warm-100 hover:text-gold-400 transition-colors p-2 -mr-2"
             aria-label="Fechar carrinho"
           >
             <X className="w-6 h-6" />
@@ -70,7 +70,7 @@ export function CartDrawer() {
 
         {items.length > 0 && (
           <div className="px-6 py-4 border-b border-noir-700">
-            <p className="text-xs text-warm-300 mb-2">
+            <p className="text-xs text-warm-100 mb-2">
               {totalPrice >= STORE.freeShippingThreshold
                 ? "Parabéns! Você ganhou frete grátis ✨"
                 : `Faltam ${formatPrice(STORE.freeShippingThreshold - totalPrice)} para frete grátis`}
@@ -87,7 +87,7 @@ export function CartDrawer() {
               <div className="w-24 h-24 bg-noir-800 rounded-full flex items-center justify-center text-gold-400/20 mb-2 border border-noir-700">
                 <ShoppingBag className="w-10 h-10" />
               </div>
-              <p className="text-warm-300 text-lg tracking-wide">O seu carrinho está vazio</p>
+              <p className="text-warm-100 text-lg tracking-wide">O seu carrinho está vazio</p>
               <button
                 onClick={close}
                 className="px-8 py-3 border border-gold-500 text-gold-400 hover:bg-gold-400 hover:text-noir-950 transition-colors uppercase tracking-[0.2em] text-xs font-bold"
@@ -124,16 +124,16 @@ export function CartDrawer() {
                             {item.product.name}
                           </Link>
                         </h3>
-                        <p className="text-warm-400 text-xs mt-1.5 tracking-wide">
+                        <p className="text-warm-100 text-xs mt-1.5 tracking-wide">
                           Cor: <span className="text-warm-100">{item.color}</span>
                         </p>
-                        <p className="text-warm-400 text-xs mt-0.5 tracking-wide">
+                        <p className="text-warm-100 text-xs mt-0.5 tracking-wide">
                           Tam: <span className="text-warm-100">{item.size}</span>
                         </p>
                       </div>
                       <button
                         onClick={() => removeItem(item.product.id, item.size, item.color)}
-                        className="text-warm-500 hover:text-danger transition-colors shrink-0 p-1 -mr-1"
+                        className="text-warm-100 hover:text-danger transition-colors shrink-0 p-1 -mr-1"
                         aria-label="Remover item"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -189,14 +189,14 @@ export function CartDrawer() {
         {items.length > 0 && (
           <div className="p-6 border-t border-noir-700 bg-noir-900/95 backdrop-blur-md">
             <div className="flex items-center justify-between mb-6">
-              <span className="text-warm-400 uppercase tracking-[0.15em] text-xs font-semibold">
+              <span className="text-warm-100 uppercase tracking-[0.15em] text-xs font-semibold">
                 Subtotal
               </span>
               <span className="text-xl text-warm-100 font-medium tracking-wider">
                 {formatPrice(totalPrice)}
               </span>
             </div>
-            <p className="-mt-4 mb-6 text-right text-[11px] text-warm-400">
+            <p className="-mt-4 mb-6 text-right text-[11px] text-warm-100">
               {maxInstallment(totalPrice).count}x de {formatPrice(maxInstallment(totalPrice).value)} sem juros · <span className="text-gold-400">{formatPrice(pixPrice(totalPrice))} no Pix</span>
             </p>
 
@@ -211,7 +211,7 @@ export function CartDrawer() {
 
               <button
                 onClick={close}
-                className="w-full text-center text-warm-400 hover:text-gold-400 text-xs transition-colors tracking-widest uppercase py-2"
+                className="w-full text-center text-warm-100 hover:text-gold-400 text-xs transition-colors tracking-widest uppercase py-2"
               >
                 Continuar comprando
               </button>
