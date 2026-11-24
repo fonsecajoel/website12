@@ -87,13 +87,15 @@ export async function POST(request: Request) {
   const total = method === "pix" ? pixPrice(gross) : Math.round(gross * 100) / 100;
   const discount = Math.round((gross - total) * 100) / 100;
   const number = orderNumber();
-  const sandbox = !process.env.PAYMENT_GATEWAY_TOKEN;
+  const pixKey = process.env.PIX_KEY?.trim() ?? "";
+  const sandbox = !process.env.PAYMENT_GATEWAY_TOKEN || (method === "pix" && !pixKey);
 
   let payment: PaymentResult;
   let installments = 1;
   if (input.payment.method === "pix") {
     const payload = buildPixPayload({
-      key: process.env.PIX_KEY ?? "pix@aela.com.br",
+      // Sem PIX_KEY o código é de teste: nenhum banco o aceita, por isso nunca paga a terceiros.
+      key: pixKey || "CHAVE-PIX-DE-TESTE",
       merchantName: process.env.PIX_MERCHANT_NAME ?? "AELA MODA",
       merchantCity: process.env.PIX_MERCHANT_CITY ?? "SAO PAULO",
       amount: total,

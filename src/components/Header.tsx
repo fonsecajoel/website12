@@ -73,13 +73,13 @@ export function Header() {
 
           <div className="hidden lg:flex flex-1"></div>
 
-          <Link href="/" className="flex-shrink-0 flex items-center justify-center group">
+          <Link href="/" className="flex-shrink-0 flex items-center justify-center">
             <Image
               src={logo}
               alt="Aela."
               width={140}
               height={46}
-              className="w-28 sm:w-32 lg:w-36 h-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
+              className="w-28 sm:w-32 lg:w-36 h-auto"
               priority
             />
           </Link>
@@ -96,7 +96,7 @@ export function Header() {
                   name="q"
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-1 placeholder:text-noir-600 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
+                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-1 placeholder:text-warm-500 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
                 /></form>
               </div>
               <button 
@@ -158,7 +158,7 @@ export function Header() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between p-6 border-b border-noir-700">
-            <Image src={logo} alt="Aela." width={110} height={36} className="w-28 h-auto opacity-90 brightness-0 invert" />
+            <Image src={logo} alt="Aela." width={110} height={36} className="w-28 h-auto" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-warm-300 hover:text-gold-400 transition-colors p-2 -mr-2"
@@ -175,7 +175,7 @@ export function Header() {
                   name="q"
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-2 placeholder:text-noir-600 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
+                  className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-2 placeholder:text-warm-500 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
                 />
                 <Search strokeWidth={1.5} className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-300" />
               </form>

@@ -24,7 +24,7 @@ export default function HeroSection() {
     <section ref={ref} className="grain relative min-h-[calc(100svh-7.5rem)] w-full overflow-hidden bg-noir-950">
       {/* brilho ambiente */}
       <div className="pointer-events-none absolute -left-40 top-1/4 h-[600px] w-[600px] rounded-full bg-gold-500/15 blur-[140px]" />
-      <div className="pointer-events-none absolute -right-20 bottom-0 h-[500px] w-[500px] rounded-full bg-wine-500/20 blur-[140px]" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-[500px] w-[500px] rounded-full bg-cafe-500/60 blur-[140px]" />
 
       <div className="relative mx-auto grid min-h-[calc(100svh-7.5rem)] max-w-[1600px] grid-cols-1 items-center gap-10 px-6 py-14 md:px-12 lg:grid-cols-12">
         <motion.div style={{ y: textY, opacity: fade }} className="relative z-10 lg:col-span-6">

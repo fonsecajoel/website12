@@ -131,12 +131,12 @@ export default function ProductDetail({ product, related }: { product: Product; 
               <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-warm-400">Tamanho</p>
               <motion.div animate={sizeError ? { x: [0, -8, 8, -6, 6, 0] } : {}} className="mb-2 flex flex-wrap gap-2">
                 {product.sizes.map((s) => (
-                  <button key={s} onClick={() => setSize(s)} className={`h-12 min-w-12 border px-3 text-sm transition-all ${size === s ? "border-gold-400 bg-gold-400 text-noir-950" : sizeError ? "border-wine-500 text-warm-200" : "border-noir-600 text-warm-200 hover:border-gold-500"}`}>
+                  <button key={s} onClick={() => setSize(s)} className={`h-12 min-w-12 border px-3 text-sm transition-all ${size === s ? "border-gold-400 bg-gold-400 text-noir-950" : sizeError ? "border-danger text-warm-200" : "border-noir-600 text-warm-200 hover:border-gold-500"}`}>
                     {s}
                   </button>
                 ))}
               </motion.div>
-              <p className={`mb-6 h-4 text-xs ${sizeError ? "text-wine-500" : "text-warm-500"}`}>
+              <p className={`mb-6 h-4 text-xs ${sizeError ? "text-danger" : "text-warm-500"}`}>
                 {sizeError ? "Selecione um tamanho" : product.stock <= 5 ? `Apenas ${product.stock} em stock` : "Em stock — envio em 24h"}
               </p>
 
@@ -167,7 +167,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
               </div>
 
               <div className="mt-8 border-t border-noir-700 pt-6">
-                <h2 className="mb-3 text-[11px] uppercase tracking-[0.25em] text-gold-500">Descrição</h2>
+                <h2 className="mb-3 text-[11px] uppercase tracking-[0.25em] text-gold-400">Descrição</h2>
                 <p className="leading-relaxed text-warm-300">{product.description}</p>
               </div>
             </div>

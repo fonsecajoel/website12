@@ -80,7 +80,7 @@ export default function ProductListingClient({ initialProducts, title, initialCa
   const Filters = (
     <div className="flex flex-col gap-10">
       <div>
-        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Categorias</h3>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-400">Categorias</h3>
         <div className="flex flex-wrap gap-2">
           {allCats.map((c) => (
             <button key={c} onClick={() => toggle(cats, setCats, c)} className={`border px-3 py-1.5 text-xs transition-colors ${cats.includes(c) ? "border-gold-400 bg-gold-400 text-noir-950" : "border-noir-600 text-warm-300 hover:border-gold-500"}`}>
@@ -90,7 +90,7 @@ export default function ProductListingClient({ initialProducts, title, initialCa
         </div>
       </div>
       <div>
-        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Tamanho</h3>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-400">Tamanho</h3>
         <div className="flex flex-wrap gap-2">
           {allSizes.map((s) => (
             <button key={s} onClick={() => toggle(sizes, setSizes, s)} className={`min-w-10 border px-2 py-2 text-xs transition-colors ${sizes.includes(s) ? "border-gold-400 bg-gold-400 text-noir-950" : "border-noir-600 text-warm-300 hover:border-gold-500"}`}>
@@ -100,7 +100,7 @@ export default function ProductListingClient({ initialProducts, title, initialCa
         </div>
       </div>
       <div>
-        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Cor</h3>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-400">Cor</h3>
         <div className="flex flex-wrap gap-3">
           {allColors.map(([name, hex]) => (
             <button key={name} title={name} aria-label={name} onClick={() => toggle(colors, setColors, name)} className={`h-7 w-7 rounded-full border-2 transition-transform hover:scale-110 ${colors.includes(name) ? "border-gold-400 scale-110" : "border-noir-600"}`} style={{ backgroundColor: hex }} />
@@ -108,7 +108,7 @@ export default function ProductListingClient({ initialProducts, title, initialCa
         </div>
       </div>
       <div>
-        <h3 className="mb-4 flex justify-between text-[11px] uppercase tracking-[0.25em] text-gold-500">
+        <h3 className="mb-4 flex justify-between text-[11px] uppercase tracking-[0.25em] text-gold-400">
           Preço máximo <span className="text-warm-200">{formatPrice(maxPrice)}</span>
         </h3>
         <input type="range" min={0} max={priceCeil} value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-full accent-[var(--color-gold-400)]" />

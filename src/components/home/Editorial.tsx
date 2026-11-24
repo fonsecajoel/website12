@@ -22,7 +22,7 @@ export function Editorial() {
           <Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1400&auto=format&fit=crop" alt="Editorial" fill sizes="40vw" className="object-cover" />
         </motion.div>
         <div className="md:col-span-4 md:col-start-7">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-gold-500">Editorial</p>
+          <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-gold-400">Editorial</p>
           <h2 className="mb-6 font-serif text-4xl leading-tight text-warm-100 md:text-5xl">
             Peças com história, feitas para <span className="italic text-gold-300">durar</span>.
           </h2>

@@ -36,7 +36,7 @@ export default function AdminLogin() {
         <h1 className="text-center font-serif text-3xl">Painel Aela.</h1>
         <input name="email" type="email" required placeholder="E-mail" autoComplete="email" className="border border-noir-600 bg-noir-950 px-4 py-3 outline-none focus:border-gold-400" />
         <input name="password" type="password" required placeholder="Senha" autoComplete="current-password" className="border border-noir-600 bg-noir-950 px-4 py-3 outline-none focus:border-gold-400" />
-        {error && <p className="text-sm text-wine-500">{error}</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
         <button disabled={loading} className="flex items-center justify-center gap-2 bg-gold-400 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-noir-950 disabled:opacity-60">
           {loading && <Loader2 className="h-4 w-4 animate-spin" />} Entrar
         </button>

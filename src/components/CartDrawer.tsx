@@ -133,7 +133,7 @@ export function CartDrawer() {
                       </div>
                       <button
                         onClick={() => removeItem(item.product.id, item.size, item.color)}
-                        className="text-warm-500 hover:text-wine-500 transition-colors shrink-0 p-1 -mr-1"
+                        className="text-warm-500 hover:text-danger transition-colors shrink-0 p-1 -mr-1"
                         aria-label="Remover item"
                       >
                         <Trash2 className="w-4 h-4" />

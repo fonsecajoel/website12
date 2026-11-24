@@ -52,7 +52,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
 
         <div className="pointer-events-none absolute left-3 top-3 flex flex-col gap-1.5">
           {product.isNew && <span className="bg-warm-100 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-noir-950">Novo</span>}
-          {discount > 0 && <span className="bg-wine-500 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-warm-100">-{discount}%</span>}
+          {discount > 0 && <span className="bg-cafe-500 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-warm-100">-{discount}%</span>}
           {product.stock > 0 && product.stock <= 5 && (
             <span className="bg-noir-950/80 px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-gold-300">Últimas {product.stock}</span>
           )}
