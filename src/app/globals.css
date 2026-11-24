@@ -2,34 +2,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Deep black base */
-  --color-noir-950: #050505;
-  --color-noir-900: #0A0A0A;
-  --color-noir-800: #111111;
-  --color-noir-700: #1A1A1A;
-  --color-noir-600: #252525;
-  --color-noir-500: #333333;
+  /*
+   * Paleta oficial Aela. — Brand Guidelines 2026 (Solaris Studio)
+   *   Preto Suave  #222020  → noir-950  (fundo)
+   *   Marrom Café  #472514  → cafe-500  (superfícies de marca)
+   *   Caramelo     #b47a32  → gold-400  (acento)
+   *   Off White    #eedebd  → warm-100  (texto)
+   * Os outros tons são misturas entre estas quatro cores, para bordas,
+   * superfícies e hierarquia de texto. Não introduzir matizes fora da paleta.
+   */
 
-  /* Gold spectrum — Versace-level opulence */
-  --color-gold-50: #FFF9E6;
-  --color-gold-100: #F5E6B8;
-  --color-gold-200: #E8D48E;
-  --color-gold-300: #D4B96A;
-  --color-gold-400: #C9A84E;
-  --color-gold-500: #B8943A;
-  --color-gold-600: #9A7B2E;
-  --color-gold-700: #7A6124;
+  /* Preto Suave — base; passos mais claros misturam com Off White */
+  --color-noir-950: #222020;
+  --color-noir-900: #292725;
+  --color-noir-800: #302d2b;
+  --color-noir-700: #3a3733;
+  --color-noir-600: #49443e;
+  --color-noir-500: #5b554c;
 
-  /* Warm neutrals for text hierarchy */
-  --color-warm-100: #F5F0E8;
-  --color-warm-200: #E0D6C8;
-  --color-warm-300: #B8AFA3;
-  --color-warm-400: #8A8178;
-  --color-warm-500: #6B6358;
+  /* Caramelo — claros misturam com Off White, escuros com Marrom Café */
+  --color-gold-50: #e7d2ac;
+  --color-gold-100: #dec296;
+  --color-gold-200: #d2ae7a;
+  --color-gold-300: #c5985c;
+  --color-gold-400: #b47a32;
+  --color-gold-500: #a06b2d;
+  --color-gold-600: #8b5a27;
+  --color-gold-700: #734720;
 
-  /* Accent — deep wine for subtle contrast */
-  --color-wine-500: #8B3A3A;
-  --color-wine-600: #6B2C2C;
+  /* Off White — hierarquia de texto; passos mais escuros misturam com Preto Suave */
+  --color-warm-100: #eedebd;
+  --color-warm-200: #dacbad;
+  --color-warm-300: #bdb097;
+  --color-warm-400: #a99d88;
+  --color-warm-500: #948a78;
+
+  /* Marrom Café */
+  --color-cafe-500: #472514;
+
+  /* Erro — estado funcional, legível sobre Preto Suave (5.2:1) */
+  --color-danger: #ec6a5c;
 
   /* Semantic */
   --background: var(--color-noir-950);
@@ -62,8 +74,9 @@
   --color-warm-400: var(--color-warm-400);
   --color-warm-500: var(--color-warm-500);
 
-  --color-wine-500: var(--color-wine-500);
-  --color-wine-600: var(--color-wine-600);
+  --color-cafe-500: var(--color-cafe-500);
+
+  --color-danger: var(--color-danger);
 
   --font-serif: var(--font-cormorant), 'Georgia', serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
@@ -81,7 +94,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Dark luxury scrollbar */
+/* Scrollbar Preto Suave + Caramelo */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -99,9 +112,9 @@ html {
   background: var(--color-gold-400);
 }
 
-/* Gold selection */
+/* Seleção em Caramelo */
 ::selection {
-  background: var(--color-gold-500);
+  background: var(--color-gold-400);
   color: var(--color-noir-950);
 }
 

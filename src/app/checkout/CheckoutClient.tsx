@@ -27,7 +27,7 @@ function Field({ label, error, children }: { label: string; error?: string; chil
     <label className="flex flex-col gap-1.5">
       <span className="text-[10px] uppercase tracking-[0.2em] text-warm-400">{label}</span>
       {children}
-      {error && <span className="text-xs text-wine-500">{error}</span>}
+      {error && <span className="text-xs text-danger">{error}</span>}
     </label>
   );
 }
@@ -256,7 +256,7 @@ export function CheckoutClient() {
                       )}
                     </motion.div>
                   </AnimatePresence>
-                  {apiError && <p className="text-sm text-wine-500">{apiError}</p>}
+                  {apiError && <p className="text-sm text-danger">{apiError}</p>}
                 </div>
               )}
             </motion.div>
@@ -302,7 +302,7 @@ export function CheckoutClient() {
             </dl>
             <div className="mt-4 flex items-end justify-between border-t border-noir-700 pt-4">
               <span className="text-[11px] uppercase tracking-[0.25em] text-warm-400">Total</span>
-              <motion.span key={total} initial={{ scale: 1.15, color: "#F5E6B8" }} animate={{ scale: 1, color: "#D4B96A" }} className="font-serif text-3xl">{formatPrice(total)}</motion.span>
+              <motion.span key={total} initial={{ scale: 1.15, color: "var(--color-gold-100)" }} animate={{ scale: 1, color: "var(--color-gold-300)" }} className="font-serif text-3xl">{formatPrice(total)}</motion.span>
             </div>
             {method === "credito" && installments > 1 && <p className="mt-1 text-right text-xs text-warm-400">{installments}x de {formatPrice(total / installments)} sem juros</p>}
           </div>

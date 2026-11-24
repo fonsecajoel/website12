@@ -138,7 +138,7 @@ export default async function AdminPage() {
                     <form action={updateProduct} className="flex items-center gap-3">
                       <input type="hidden" name="id" value={p.id} />
                       <input name="price" type="number" step="0.01" defaultValue={p.price} className={`${input} w-28`} />
-                      <input name="stock" type="number" defaultValue={p.stock} className={`${input} w-20 ${p.stock <= 5 ? "border-wine-500" : ""}`} />
+                      <input name="stock" type="number" defaultValue={p.stock} className={`${input} w-20 ${p.stock <= 5 ? "border-danger" : ""}`} />
                       <input name="active" type="checkbox" defaultChecked={p.active} className="h-4 w-4 accent-[var(--color-gold-400)]" />
                       <button className="border border-gold-500 px-3 py-1 text-xs text-gold-300 hover:bg-gold-400 hover:text-noir-950">Guardar</button>
                     </form>

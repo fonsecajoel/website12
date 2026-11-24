@@ -21,7 +21,7 @@ export function ProductShowcase({ products }: { products: Product[] }) {
     <section className="mx-auto w-full max-w-[1500px] px-6 py-24 md:px-16">
       <div className="mb-14 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <div>
-          <p className="mb-3 text-[11px] uppercase tracking-[0.35em] text-gold-500">A seleção</p>
+          <p className="mb-3 text-[11px] uppercase tracking-[0.35em] text-gold-400">A seleção</p>
           <h2 className="font-serif text-5xl leading-none text-warm-100 md:text-7xl">
             Peças que <span className="italic text-gold-300">falam</span> por si.
           </h2>
