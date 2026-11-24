@@ -1,33 +1,42 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X } from "lucide-react";
 import logo from "@/assets/logos/Logo-horizontal-02.png";
 import { useCartStore } from "@/store/cart";
+import { useHydrated } from "@/lib/use-hydrated";
 
 const NAV_LINKS = [
-  { label: "Novidades", href: "/novidades" },
-  { label: "Vestidos", href: "/produtos?subcategory=vestidos" },
-  { label: "Tops & Blusas", href: "/produtos?subcategory=tops" },
-  { label: "Saias", href: "/produtos?subcategory=saias" },
-  { label: "Sapatos", href: "/produtos?subcategory=sapatos" },
-  { label: "Malas", href: "/produtos?subcategory=malas" },
-  { label: "Acessórios", href: "/acessorios" },
+  { label: "Novidades", href: "/produtos?filtro=novos" },
+  { label: "Vestidos", href: "/produtos?categoria=vestidos" },
+  { label: "Conjuntos", href: "/produtos?categoria=conjuntos" },
+  { label: "Saias", href: "/produtos?categoria=saias" },
+  { label: "Sapatos", href: "/produtos?categoria=sapatos" },
+  { label: "Bolsas", href: "/produtos?categoria=bolsas" },
+  { label: "Promoções", href: "/produtos?filtro=promo" },
 ];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHydrated();
+  const router = useRouter();
+  const wishCount = useCartStore((state) => state.wishlist.length);
+  const search = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
+    setIsMobileMenuOpen(false);
+    router.push(q ? `/produtos?q=${encodeURIComponent(q)}` : "/produtos");
+  };
   
   const itemsCount = useCartStore((state) => state.totalItems());
   const openCart = useCartStore((state) => state.open);
 
   useEffect(() => {
-    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -39,7 +48,7 @@ export function Header() {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     }
   }, [isMobileMenuOpen]);
 
@@ -83,11 +92,12 @@ export function Header() {
                   isSearchOpen ? "w-48 opacity-100" : "w-0 opacity-0"
                 }`}
               >
-                <input
-                  type="text"
+                <form onSubmit={search}><input
+                  name="q"
+                  type="search"
                   placeholder="Buscar..."
                   className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-1 placeholder:text-noir-600 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
-                />
+                /></form>
               </div>
               <button 
                 className="text-warm-300 hover:text-gold-400 transition-colors p-2" 
@@ -98,12 +108,13 @@ export function Header() {
               </button>
             </div>
 
-            <button className="lg:hidden text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Buscar">
+            <button className="lg:hidden text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Buscar" onClick={() => setIsMobileMenuOpen(true)}>
               <Search strokeWidth={1.5} className="w-5 h-5" />
             </button>
 
-            <Link href="/conta" className="hidden sm:flex items-center justify-center text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Minha Conta">
-              <User strokeWidth={1.5} className="w-5 h-5" />
+            <Link href="/favoritos" className="relative hidden sm:flex items-center justify-center text-warm-300 hover:text-gold-400 transition-colors p-2" aria-label="Favoritos">
+              <Heart strokeWidth={1.5} className="w-5 h-5" />
+              {mounted && wishCount > 0 && <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-gold-400 text-noir-950 text-[9px] font-bold flex items-center justify-center">{wishCount}</span>}
             </Link>
 
             <button 
@@ -113,7 +124,7 @@ export function Header() {
             >
               <ShoppingBag strokeWidth={1.5} className="w-5 h-5" />
               {mounted && itemsCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-gold-400 rounded-full" />
+                <span key={itemsCount} className="absolute -top-0.5 -right-0.5 min-w-4 h-4 px-1 rounded-full bg-gold-400 text-noir-950 text-[9px] font-bold flex items-center justify-center animate-[ping_0.6s_ease-out_1_reverse]">{itemsCount}</span>
               )}
             </button>
 
@@ -159,14 +170,15 @@ export function Header() {
           
           <div className="flex flex-col h-[calc(100%-80px)] overflow-y-auto">
             <div className="p-6">
-              <div className="relative w-full mb-10">
+              <form onSubmit={search} className="relative w-full mb-10">
                 <input
-                  type="text"
+                  name="q"
+                  type="search"
                   placeholder="Buscar..."
                   className="w-full bg-transparent border-b border-noir-700 text-warm-200 text-xs uppercase tracking-[0.2em] px-0 py-2 placeholder:text-noir-600 focus:outline-none focus:border-gold-400 transition-colors duration-300 font-sans"
                 />
                 <Search strokeWidth={1.5} className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-300" />
-              </div>
+              </form>
 
               <nav className="flex flex-col space-y-8">
                 {NAV_LINKS.map((link, index) => (
@@ -190,12 +202,12 @@ export function Header() {
 
             <div className="mt-auto p-6 border-t border-noir-700 bg-noir-950/50">
               <Link 
-                href="/conta" 
+                href="/favoritos" 
                 className="flex items-center space-x-3 text-warm-300 hover:text-gold-400 transition-colors duration-300"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <User strokeWidth={1.5} className="w-5 h-5" />
-                <span className="text-xs font-medium tracking-[0.2em] uppercase font-sans">Minha Conta</span>
+                <Heart strokeWidth={1.5} className="w-5 h-5" />
+                <span className="text-xs font-medium tracking-[0.2em] uppercase font-sans">Favoritos</span>
               </Link>
             </div>
           </div>

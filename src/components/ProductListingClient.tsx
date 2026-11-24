@@ -1,455 +1,201 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Product } from "@/lib/types";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronRight, LayoutGrid, Rows3, Search, SlidersHorizontal, X } from "lucide-react";
+import type { Product } from "@/lib/types";
 import ProductCard from "./ProductCard";
-import { SlidersHorizontal, ChevronDown, X, ChevronRight, Check } from "lucide-react";
+import { formatPrice } from "@/lib/format";
 
-interface ProductListingClientProps {
+type Sort = "relevancia" | "menor" | "maior" | "novidades" | "avaliacao";
+
+interface Props {
   initialProducts: Product[];
   title: string;
-  breadcrumbs: { label: string; href?: string }[];
-  initialCategory?: string | null;
-  initialFilter?: string | null;
+  initialCategory?: string;
+  initialFilter?: string;
+  initialQuery?: string;
 }
 
-const SORT_OPTIONS = [
-  { value: "relevance", label: "Relevância" },
-  { value: "price_asc", label: "Menor Preço" },
-  { value: "price_desc", label: "Maior Preço" },
-  { value: "newest", label: "Novidades" },
-];
+const LABELS: Record<string, string> = {
+  vestidos: "Vestidos", conjuntos: "Conjuntos", saias: "Saias", sapatos: "Sapatos", bolsas: "Bolsas",
+  bijuteria: "Bijuteria", blusas: "Blusas", blazers: "Blazers", "t-shirts": "T-shirts", "calças": "Calças",
+  tricot: "Tricot", bodys: "Bodys", "macacões": "Macacões",
+};
+const label = (s: string): string => LABELS[s] ?? s.charAt(0).toUpperCase() + s.slice(1);
 
-const PRICE_RANGES = [
-  { id: "under_50", label: "Até €50", min: 0, max: 50 },
-  { id: "50_100", label: "€50 - €100", min: 50, max: 100 },
-  { id: "100_200", label: "€100 - €200", min: 100, max: 200 },
-  { id: "over_200", label: "Acima de €200", min: 200, max: Infinity },
-];
+export default function ProductListingClient({ initialProducts, title, initialCategory, initialFilter, initialQuery }: Props) {
+  const [query, setQuery] = useState(initialQuery ?? "");
+  const [cats, setCats] = useState<string[]>(initialCategory ? [initialCategory] : []);
+  const [sizes, setSizes] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
+  const [maxPrice, setMaxPrice] = useState<number>(() => Math.ceil(Math.max(...initialProducts.map((p) => p.price), 0)));
+  const [filter, setFilter] = useState<string | undefined>(initialFilter);
+  const [sort, setSort] = useState<Sort>("relevancia");
+  const [cols, setCols] = useState<3 | 4>(4);
+  const [panel, setPanel] = useState(false);
 
-export default function ProductListingClient({
-  initialProducts,
-  title,
-  breadcrumbs,
-  initialCategory,
-  initialFilter,
-}: ProductListingClientProps) {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    initialCategory ? [initialCategory.toLowerCase()] : []
-  );
-  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
-  const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [sortOption, setSortOption] = useState("relevance");
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [isSortOpen, setIsSortOpen] = useState(false);
-
-  useEffect(() => {
-    if (initialFilter === "novidades") {
-      setSortOption("newest");
-    }
-  }, [initialFilter]);
-
-  const availableCategories = useMemo(() => {
-    return Array.from(new Set(initialProducts.map((p) => p.category))).filter(Boolean);
+  const priceCeil = Math.ceil(Math.max(...initialProducts.map((p) => p.price), 0));
+  const allCats = useMemo(() => [...new Set(initialProducts.map((p) => p.subcategory))], [initialProducts]);
+  const allSizes = useMemo(() => [...new Set(initialProducts.flatMap((p) => p.sizes))], [initialProducts]);
+  const allColors = useMemo(() => {
+    const m = new Map<string, string>();
+    initialProducts.forEach((p) => p.colors.forEach((c) => m.set(c.name, c.hex)));
+    return [...m.entries()];
   }, [initialProducts]);
 
-  const availableSubcategories = useMemo(() => {
-    let filtered = initialProducts;
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter((p) => selectedCategories.includes(p.category));
-    }
-    return Array.from(new Set(filtered.map((p) => p.subcategory))).filter(Boolean);
-  }, [initialProducts, selectedCategories]);
+  const list = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const out = initialProducts.filter(
+      (p) =>
+        (!q || `${p.name} ${p.description} ${p.subcategory}`.toLowerCase().includes(q)) &&
+        (cats.length === 0 || cats.includes(p.subcategory)) &&
+        (sizes.length === 0 || p.sizes.some((s) => sizes.includes(s))) &&
+        (colors.length === 0 || p.colors.some((c) => colors.includes(c.name))) &&
+        p.price <= maxPrice &&
+        (filter !== "novos" || p.isNew) &&
+        (filter !== "promo" || p.isPromo),
+    );
+    const sorters: Record<Sort, (a: Product, b: Product) => number> = {
+      relevancia: () => 0,
+      menor: (a, b) => a.price - b.price,
+      maior: (a, b) => b.price - a.price,
+      novidades: (a, b) => Number(!!b.isNew) - Number(!!a.isNew),
+      avaliacao: (a, b) => b.rating - a.rating,
+    };
+    return [...out].sort(sorters[sort]);
+  }, [initialProducts, query, cats, sizes, colors, maxPrice, filter, sort]);
 
-  const availableSizes = useMemo(() => {
-    const sizes = new Set<string>();
-    initialProducts.forEach((p) => p.sizes?.forEach((s) => sizes.add(s)));
-    return Array.from(sizes);
-  }, [initialProducts]);
+  const toggle = (arr: string[], set: (v: string[]) => void, v: string) => set(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
+  const chips = [
+    ...cats.map((c) => ({ k: `c-${c}`, t: label(c), clear: () => toggle(cats, setCats, c) })),
+    ...sizes.map((s) => ({ k: `s-${s}`, t: `Tam. ${s}`, clear: () => toggle(sizes, setSizes, s) })),
+    ...colors.map((c) => ({ k: `k-${c}`, t: c, clear: () => toggle(colors, setColors, c) })),
+    ...(filter ? [{ k: "f", t: filter === "novos" ? "Novidades" : "Promoções", clear: () => setFilter(undefined) }] : []),
+    ...(maxPrice < priceCeil ? [{ k: "p", t: `Até ${formatPrice(maxPrice)}`, clear: () => setMaxPrice(priceCeil) }] : []),
+  ];
+  const clearAll = () => { setCats([]); setSizes([]); setColors([]); setFilter(undefined); setMaxPrice(priceCeil); setQuery(""); };
 
-  const availableColors = useMemo(() => {
-    const colors = new Map<string, string>();
-    initialProducts.forEach((p) => {
-      p.colors?.forEach((c) => {
-        colors.set(c.name, c.hex);
-      });
-    });
-    return Array.from(colors.entries()).map(([name, hex]) => ({ name, hex }));
-  }, [initialProducts]);
-
-  const filteredProducts = useMemo(() => {
-    return initialProducts.filter((product) => {
-      if (selectedCategories.length > 0 && !selectedCategories.includes(product.category.toLowerCase())) {
-        return false;
-      }
-      if (selectedSubcategories.length > 0 && !selectedSubcategories.includes(product.subcategory)) {
-        return false;
-      }
-      if (selectedPriceRanges.length > 0) {
-        const matchesPrice = selectedPriceRanges.some((rangeId) => {
-          const range = PRICE_RANGES.find((r) => r.id === rangeId);
-          if (!range) return false;
-          return product.price >= range.min && product.price <= range.max;
-        });
-        if (!matchesPrice) return false;
-      }
-      if (selectedSizes.length > 0) {
-        if (!product.sizes || !product.sizes.some((s) => selectedSizes.includes(s))) {
-          return false;
-        }
-      }
-      if (selectedColors.length > 0) {
-        if (!product.colors || !product.colors.some((c) => selectedColors.includes(c.name))) {
-          return false;
-        }
-      }
-      return true;
-    });
-  }, [
-    initialProducts,
-    selectedCategories,
-    selectedSubcategories,
-    selectedPriceRanges,
-    selectedSizes,
-    selectedColors,
-  ]);
-
-  const sortedProducts = useMemo(() => {
-    const sorted = [...filteredProducts];
-    switch (sortOption) {
-      case "price_asc":
-        return sorted.sort((a, b) => a.price - b.price);
-      case "price_desc":
-        return sorted.sort((a, b) => b.price - a.price);
-      case "newest":
-        return sorted.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1));
-      case "relevance":
-      default:
-        return sorted;
-    }
-  }, [filteredProducts, sortOption]);
-
-  const clearFilters = () => {
-    setSelectedCategories(initialCategory ? [initialCategory.toLowerCase()] : []);
-    setSelectedSubcategories([]);
-    setSelectedPriceRanges([]);
-    setSelectedSizes([]);
-    setSelectedColors([]);
-  };
-
-  const hasActiveFilters =
-    selectedCategories.length > (initialCategory ? 1 : 0) ||
-    selectedSubcategories.length > 0 ||
-    selectedPriceRanges.length > 0 ||
-    selectedSizes.length > 0 ||
-    selectedColors.length > 0;
-
-  const toggleArrayItem = (item: string, array: string[], setArray: (val: string[]) => void) => {
-    if (array.includes(item)) {
-      setArray(array.filter((i) => i !== item));
-    } else {
-      setArray([...array, item]);
-    }
-  };
-
-  const renderFilters = () => (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h3 className="text-warm-100 font-medium tracking-widest uppercase text-sm">Filtros</h3>
-        {hasActiveFilters && (
-          <button
-            onClick={clearFilters}
-            className="text-warm-400 hover:text-gold-400 text-xs tracking-wider uppercase transition-colors"
-          >
-            Limpar
-          </button>
-        )}
-      </div>
-
-      {!initialCategory && availableCategories.length > 0 && (
-        <div className="space-y-3 border-t border-noir-700 pt-5">
-          <h4 className="text-warm-300 text-xs tracking-widest uppercase">Categoria</h4>
-          <div className="space-y-2">
-            {["feminino", "acessorios"].map((cat) => (
-              <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${
-                  selectedCategories.includes(cat)
-                    ? 'border-gold-400 bg-gold-400 text-noir-950'
-                    : 'border-noir-600 group-hover:border-warm-300'
-                }`}>
-                  {selectedCategories.includes(cat) && <Check className="w-3 h-3" />}
-                </div>
-                <span className={`text-sm transition-colors ${
-                  selectedCategories.includes(cat) ? 'text-warm-100' : 'text-warm-300 group-hover:text-warm-100'
-                }`}>
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </span>
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={selectedCategories.includes(cat)}
-                  onChange={() => toggleArrayItem(cat, selectedCategories, setSelectedCategories)}
-                />
-              </label>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {availableSubcategories.length > 0 && (
-        <div className="space-y-3 border-t border-noir-700 pt-5">
-          <h4 className="text-warm-300 text-xs tracking-widest uppercase">Tipo</h4>
-          <div className="space-y-2">
-            {availableSubcategories.map((subcat) => (
-              <label key={subcat} className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${
-                  selectedSubcategories.includes(subcat)
-                    ? 'border-gold-400 bg-gold-400 text-noir-950'
-                    : 'border-noir-600 group-hover:border-warm-300'
-                }`}>
-                  {selectedSubcategories.includes(subcat) && <Check className="w-3 h-3" />}
-                </div>
-                <span className={`text-sm transition-colors ${
-                  selectedSubcategories.includes(subcat) ? 'text-warm-100' : 'text-warm-300 group-hover:text-warm-100'
-                }`}>
-                  {subcat}
-                </span>
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={selectedSubcategories.includes(subcat)}
-                  onChange={() => toggleArrayItem(subcat, selectedSubcategories, setSelectedSubcategories)}
-                />
-              </label>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="space-y-3 border-t border-noir-700 pt-5">
-        <h4 className="text-warm-300 text-xs tracking-widest uppercase">Preço</h4>
-        <div className="space-y-2">
-          {PRICE_RANGES.map((range) => (
-            <label key={range.id} className="flex items-center gap-3 cursor-pointer group">
-              <div className={`w-4 h-4 border flex items-center justify-center transition-colors ${
-                selectedPriceRanges.includes(range.id)
-                  ? 'border-gold-400 bg-gold-400 text-noir-950'
-                  : 'border-noir-600 group-hover:border-warm-300'
-              }`}>
-                {selectedPriceRanges.includes(range.id) && <Check className="w-3 h-3" />}
-              </div>
-              <span className={`text-sm transition-colors ${
-                selectedPriceRanges.includes(range.id) ? 'text-warm-100' : 'text-warm-300 group-hover:text-warm-100'
-              }`}>
-                {range.label}
-              </span>
-              <input
-                type="checkbox"
-                className="hidden"
-                checked={selectedPriceRanges.includes(range.id)}
-                onChange={() => toggleArrayItem(range.id, selectedPriceRanges, setSelectedPriceRanges)}
-              />
-            </label>
+  const Filters = (
+    <div className="flex flex-col gap-10">
+      <div>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Categorias</h3>
+        <div className="flex flex-wrap gap-2">
+          {allCats.map((c) => (
+            <button key={c} onClick={() => toggle(cats, setCats, c)} className={`border px-3 py-1.5 text-xs transition-colors ${cats.includes(c) ? "border-gold-400 bg-gold-400 text-noir-950" : "border-noir-600 text-warm-300 hover:border-gold-500"}`}>
+              {label(c)}
+            </button>
           ))}
         </div>
       </div>
-
-      {availableSizes.length > 0 && (
-        <div className="space-y-3 border-t border-noir-700 pt-5">
-          <h4 className="text-warm-300 text-xs tracking-widest uppercase">Tamanho</h4>
-          <div className="flex flex-wrap gap-2">
-            {availableSizes.map((size) => (
-              <button
-                key={size}
-                onClick={() => toggleArrayItem(size, selectedSizes, setSelectedSizes)}
-                className={`min-w-[40px] h-10 px-2 flex items-center justify-center border text-xs transition-all ${
-                  selectedSizes.includes(size)
-                    ? 'border-gold-400 bg-gold-400 text-noir-950 font-semibold'
-                    : 'border-noir-600 text-warm-400 hover:border-warm-300 hover:text-warm-100'
-                }`}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
+      <div>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Tamanho</h3>
+        <div className="flex flex-wrap gap-2">
+          {allSizes.map((s) => (
+            <button key={s} onClick={() => toggle(sizes, setSizes, s)} className={`min-w-10 border px-2 py-2 text-xs transition-colors ${sizes.includes(s) ? "border-gold-400 bg-gold-400 text-noir-950" : "border-noir-600 text-warm-300 hover:border-gold-500"}`}>
+              {s}
+            </button>
+          ))}
         </div>
-      )}
-
-      {availableColors.length > 0 && (
-        <div className="space-y-3 border-t border-noir-700 pt-5">
-          <h4 className="text-warm-300 text-xs tracking-widest uppercase">Cor</h4>
-          <div className="flex flex-wrap gap-3">
-            {availableColors.map((color) => (
-              <button
-                key={color.name}
-                onClick={() => toggleArrayItem(color.name, selectedColors, setSelectedColors)}
-                className={`w-8 h-8 rounded-full border-2 transition-all relative ${
-                  selectedColors.includes(color.name)
-                    ? 'ring-2 ring-offset-2 ring-offset-noir-950 ring-gold-400 border-transparent scale-110'
-                    : 'border-noir-600 hover:scale-110 hover:border-warm-300'
-                }`}
-                style={{ backgroundColor: color.hex }}
-                title={color.name}
-              >
-                {selectedColors.includes(color.name) && (
-                  <Check className={`absolute inset-0 m-auto w-4 h-4 ${
-                    ['#ffffff', '#f5f0eb', '#f3f4f6'].includes(color.hex.toLowerCase()) ? 'text-noir-900' : 'text-warm-100'
-                  }`} />
-                )}
-              </button>
-            ))}
-          </div>
+      </div>
+      <div>
+        <h3 className="mb-4 text-[11px] uppercase tracking-[0.25em] text-gold-500">Cor</h3>
+        <div className="flex flex-wrap gap-3">
+          {allColors.map(([name, hex]) => (
+            <button key={name} title={name} aria-label={name} onClick={() => toggle(colors, setColors, name)} className={`h-7 w-7 rounded-full border-2 transition-transform hover:scale-110 ${colors.includes(name) ? "border-gold-400 scale-110" : "border-noir-600"}`} style={{ backgroundColor: hex }} />
+          ))}
         </div>
-      )}
+      </div>
+      <div>
+        <h3 className="mb-4 flex justify-between text-[11px] uppercase tracking-[0.25em] text-gold-500">
+          Preço máximo <span className="text-warm-200">{formatPrice(maxPrice)}</span>
+        </h3>
+        <input type="range" min={0} max={priceCeil} value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-full accent-[var(--color-gold-400)]" />
+      </div>
     </div>
   );
 
   return (
-    <div className="bg-noir-950 min-h-screen pt-24 pb-20">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
-        
-        <div className="mb-10">
-          <nav className="flex items-center gap-2 text-xs tracking-widest uppercase text-warm-400 mb-6">
-            {breadcrumbs.map((crumb, index) => (
-              <div key={index} className="flex items-center gap-2">
-                {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-gold-400 transition-colors">
-                    {crumb.label}
-                  </Link>
-                ) : (
-                  <span className="text-warm-100">{crumb.label}</span>
-                )}
-                {index < breadcrumbs.length - 1 && <ChevronRight className="w-3 h-3" />}
-              </div>
-            ))}
-          </nav>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h1 className="font-serif text-gold-300 text-3xl md:text-5xl tracking-wider uppercase">
-                {title}
-              </h1>
-              <p className="text-warm-400 mt-2 font-light tracking-wide">
-                {sortedProducts.length} {sortedProducts.length === 1 ? 'produto' : 'produtos'}
-              </p>
-            </div>
+    <div className="min-h-screen bg-noir-950">
+      <div className="mx-auto max-w-[1500px] px-6 pt-12 md:px-16">
+        <nav className="mb-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-warm-400">
+          <Link href="/" className="hover:text-gold-400">Início</Link>
+          <ChevronRight className="h-3 w-3" />
+          <span className="text-warm-200">{title}</span>
+        </nav>
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="font-serif text-5xl text-warm-100 md:text-7xl">
+          {title}
+        </motion.h1>
+        <p className="mt-3 text-sm text-warm-400">{list.length} {list.length === 1 ? "peça" : "peças"}</p>
 
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsMobileFilterOpen(true)}
-                className="lg:hidden flex-1 flex items-center justify-center gap-2 py-3 px-4 border border-noir-600 text-warm-100 text-xs tracking-widest uppercase hover:border-gold-500 transition-colors"
-              >
-                <SlidersHorizontal className="w-4 h-4" />
-                Filtros
-              </button>
-
-              <div className="relative w-full md:w-auto z-10">
-                <button
-                  onClick={() => setIsSortOpen(!isSortOpen)}
-                  className="flex w-full md:w-[220px] items-center justify-between py-3 px-4 border border-noir-600 bg-noir-800 text-warm-100 text-xs tracking-widest uppercase hover:border-gold-500 transition-colors"
-                >
-                  <span className="truncate mr-2">
-                    {SORT_OPTIONS.find(o => o.value === sortOption)?.label}
-                  </span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isSortOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {isSortOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-1 border border-noir-600 bg-noir-800 shadow-2xl py-2">
-                    {SORT_OPTIONS.map((option) => (
-                      <button
-                        key={option.value}
-                        className={`w-full text-left px-4 py-2 text-xs tracking-widest uppercase transition-colors ${
-                          sortOption === option.value
-                            ? 'text-gold-400 bg-noir-700'
-                            : 'text-warm-300 hover:text-warm-100 hover:bg-noir-700/50'
-                        }`}
-                        onClick={() => {
-                          setSortOption(option.value);
-                          setIsSortOpen(false);
-                        }}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+        <div className="sticky top-[calc(4rem+1px)] z-30 -mx-6 mt-8 flex flex-wrap items-center gap-3 border-y border-noir-700 bg-noir-950/90 px-6 py-3 backdrop-blur md:-mx-16 md:px-16 lg:top-[7.5rem]">
+          <button onClick={() => setPanel(true)} className="flex items-center gap-2 border border-noir-600 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-warm-200 hover:border-gold-500 lg:hidden">
+            <SlidersHorizontal className="h-4 w-4" /> Filtros
+          </button>
+          <div className="relative flex-1 min-w-[180px] max-w-sm">
+            <Search className="absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-warm-400" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar na coleção…" className="w-full border-b border-noir-600 bg-transparent py-2 pl-7 text-sm text-warm-100 outline-none placeholder:text-warm-500 focus:border-gold-400" />
+          </div>
+          <select value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="border border-noir-600 bg-noir-900 px-3 py-2 text-xs text-warm-200 outline-none focus:border-gold-400">
+            <option value="relevancia">Relevância</option>
+            <option value="novidades">Novidades</option>
+            <option value="menor">Menor preço</option>
+            <option value="maior">Maior preço</option>
+            <option value="avaliacao">Mais bem avaliados</option>
+          </select>
+          <div className="hidden gap-1 md:flex">
+            <button aria-label="3 colunas" onClick={() => setCols(3)} className={`p-2 ${cols === 3 ? "text-gold-400" : "text-warm-500"}`}><Rows3 className="h-4 w-4" /></button>
+            <button aria-label="4 colunas" onClick={() => setCols(4)} className={`p-2 ${cols === 4 ? "text-gold-400" : "text-warm-500"}`}><LayoutGrid className="h-4 w-4" /></button>
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-32">
-              {renderFilters()}
-            </div>
-          </aside>
+        <AnimatePresence>
+          {chips.length > 0 && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="flex flex-wrap items-center gap-2 overflow-hidden pt-4">
+              {chips.map((c) => (
+                <motion.button layout key={c.k} onClick={c.clear} className="flex items-center gap-1.5 rounded-full bg-noir-800 px-3 py-1 text-xs text-warm-200 hover:bg-noir-700">
+                  {c.t} <X className="h-3 w-3" />
+                </motion.button>
+              ))}
+              <button onClick={clearAll} className="text-xs text-gold-400 underline underline-offset-4">Limpar tudo</button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-          <main className="flex-1">
-            {sortedProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-                {sortedProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+        <div className="flex gap-12 py-10">
+          <aside className="hidden w-60 shrink-0 lg:block">{Filters}</aside>
+          <div className="flex-1">
+            {list.length === 0 ? (
+              <div className="flex flex-col items-center py-32 text-center">
+                <p className="mb-4 font-serif text-3xl text-warm-100">Nenhuma peça encontrada</p>
+                <button onClick={clearAll} className="border border-gold-500 px-8 py-3 text-[11px] uppercase tracking-[0.2em] text-gold-300 hover:bg-gold-400 hover:text-noir-950">Limpar filtros</button>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-32 text-center border border-dashed border-noir-600">
-                <p className="text-warm-100 text-lg tracking-wide mb-4">Nenhum produto encontrado</p>
-                <p className="text-warm-300 max-w-md mx-auto mb-8">
-                  Tente ajustar os seus filtros ou remover algumas seleções para ver mais resultados.
-                </p>
-                <button
-                  onClick={clearFilters}
-                  className="px-8 py-3 border border-gold-500 text-gold-400 hover:bg-gold-400 hover:text-noir-950 transition-colors text-xs font-bold tracking-widest uppercase"
-                >
-                  Limpar Filtros
-                </button>
-              </div>
+              <motion.div layout className={`grid grid-cols-2 gap-x-5 gap-y-12 md:gap-x-8 ${cols === 3 ? "md:grid-cols-3" : "md:grid-cols-3 xl:grid-cols-4"}`}>
+                {list.map((p, i) => (
+                  <ProductCard key={p.id} product={p} index={i} />
+                ))}
+              </motion.div>
             )}
-          </main>
+          </div>
         </div>
       </div>
 
-      {isMobileFilterOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex justify-end">
-          <div 
-            className="absolute inset-0 bg-noir-950/80 backdrop-blur-sm transition-opacity"
-            onClick={() => setIsMobileFilterOpen(false)}
-          />
-          <div className="relative w-full max-w-sm bg-noir-900 h-full flex flex-col shadow-2xl border-l border-noir-700 transform transition-transform">
-            <div className="flex items-center justify-between p-6 border-b border-noir-700">
-              <h2 className="text-warm-100 text-lg tracking-widest uppercase">Filtros</h2>
-              <button 
-                onClick={() => setIsMobileFilterOpen(false)}
-                className="text-warm-400 hover:text-gold-400 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto p-6">
-              {renderFilters()}
-            </div>
-            <div className="p-6 border-t border-noir-700 bg-noir-900 flex gap-4">
-              <button
-                onClick={clearFilters}
-                className="flex-1 py-4 border border-gold-500 text-gold-400 hover:bg-gold-500/10 text-xs tracking-widest uppercase transition-colors"
-              >
-                Limpar
-              </button>
-              <button
-                onClick={() => setIsMobileFilterOpen(false)}
-                className="flex-1 py-4 bg-gold-500 text-noir-950 font-bold text-xs tracking-widest uppercase hover:bg-gold-400 transition-colors"
-              >
-                Ver ({sortedProducts.length})
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {panel && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] bg-noir-950/80 backdrop-blur-sm lg:hidden" onClick={() => setPanel(false)}>
+            <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", damping: 30, stiffness: 300 }} onClick={(e) => e.stopPropagation()} className="h-full w-[85%] max-w-sm overflow-y-auto bg-noir-900 p-6">
+              <div className="mb-8 flex items-center justify-between">
+                <h2 className="font-serif text-2xl">Filtros</h2>
+                <button onClick={() => setPanel(false)} aria-label="Fechar"><X className="h-5 w-5" /></button>
+              </div>
+              {Filters}
+              <button onClick={() => setPanel(false)} className="mt-10 w-full bg-gold-400 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-noir-950">Ver {list.length} peças</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

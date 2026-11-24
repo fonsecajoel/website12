@@ -1,21 +1,24 @@
-import { Product, Category } from "./types";
+import type { Product, Category } from "./types";
+export { formatPrice } from "./format";
+
+type RawProduct = Omit<Product, "stock" | "rating" | "reviews"> & Partial<Pick<Product, "stock" | "rating" | "reviews">>;
 
 function unsplash(id: string, w = 600, h = 800): string {
   return `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80&auto=format`;
 }
 
 export const categories: Category[] = [
-  { name: "Novidades", slug: "novidades", image: unsplash("1558618666-fcd25c85f82e", 400, 400) },
-  { name: "Vestidos", slug: "vestidos", image: unsplash("1595777457583-95e4f5e7f7b8", 400, 400) },
+  { name: "Novidades", slug: "novidades", tagline: "Acabou de chegar", image: unsplash("1539008835657-9e8e9680c956", 400, 400) },
+  { name: "Vestidos", slug: "vestidos", image: unsplash("1572804013309-59a88b7e92f1", 400, 400) },
   { name: "Tops & Blusas", slug: "tops", image: unsplash("1564257631407-4deb1f99d992", 400, 400) },
-  { name: "Saias", slug: "saias", image: unsplash("1583496661160-fb5886a773b9", 400, 400) },
+  { name: "Saias", slug: "saias", image: unsplash("1551803091-e20673f15770", 400, 400) },
   { name: "Calças", slug: "calcas", image: unsplash("1594938298603-c8148c4dae35", 400, 400) },
   { name: "Sapatos", slug: "sapatos", image: unsplash("1543163521-1bf539c55dd2", 400, 400) },
-  { name: "Malas", slug: "bolsas", image: unsplash("1548036328-c9fa89d128fa", 400, 400) },
+  { name: "Bolsas", slug: "bolsas", image: unsplash("1590874103328-eac38a683ce7", 400, 400) },
   { name: "Acessórios", slug: "acessorios", image: unsplash("1611085583191-a3b181a88401", 400, 400) },
 ];
 
-export const products: Product[] = [
+const rawProducts: RawProduct[] = [
   {
     id: "1",
     name: "Blazer Oversized Linho",
@@ -44,7 +47,7 @@ export const products: Product[] = [
     price: 59.9,
     images: [
       unsplash("1521572163474-6864f9cf17ab"),
-      unsplash("1503342217505-b0a15ec515c5"),
+      unsplash("1434389677669-e08b4cac3105"),
     ],
     category: "feminino",
     subcategory: "t-shirts",
@@ -83,7 +86,7 @@ export const products: Product[] = [
     price: 149.9,
     originalPrice: 199.9,
     images: [
-      unsplash("1595777457583-95e4f5e7f7b8"),
+      unsplash("1572804013309-59a88b7e92f1"),
       unsplash("1496747611176-843222e1e57c"),
     ],
     category: "feminino",
@@ -118,11 +121,11 @@ export const products: Product[] = [
   },
   {
     id: "7",
-    name: "Mala Structured Couro Premium",
+    name: "Bolsa Structured Couro Premium",
     slug: "bolsa-structured-couro-premium",
     price: 389.9,
     images: [
-      unsplash("1548036328-c9fa89d128fa"),
+      unsplash("1590874103328-eac38a683ce7"),
       unsplash("1584917865442-de89df76afd3"),
     ],
     category: "acessorios",
@@ -133,7 +136,7 @@ export const products: Product[] = [
       { name: "Caramelo", hex: "#c9a96e" },
       { name: "Creme", hex: "#f5f0eb" },
     ],
-    description: "Mala estruturada em couro premium com forro de seda. Design atemporal que eleva qualquer visual.",
+    description: "Bolsa estruturada em couro premium com forro de seda. Design atemporal que eleva qualquer visual.",
     isNew: true,
   },
   {
@@ -162,8 +165,8 @@ export const products: Product[] = [
     slug: "saia-midi-plissada",
     price: 139.9,
     images: [
-      unsplash("1583496661160-fb5886a773b9"),
-      unsplash("1558171813-01ed3d751f6b"),
+      unsplash("1551803091-e20673f15770"),
+      unsplash("1577900232427-18219b9166a0"),
     ],
     category: "feminino",
     subcategory: "saias",
@@ -242,7 +245,7 @@ export const products: Product[] = [
     price: 269.9,
     images: [
       unsplash("1515886657613-9f3515b0c78f"),
-      unsplash("1558618666-fcd25c85f82e"),
+      unsplash("1539008835657-9e8e9680c956"),
     ],
     category: "feminino",
     subcategory: "macacões",
@@ -320,7 +323,7 @@ export const products: Product[] = [
     price: 169.9,
     images: [
       unsplash("1584917865442-de89df76afd3"),
-      unsplash("1548036328-c9fa89d128fa"),
+      unsplash("1590874103328-eac38a683ce7"),
     ],
     category: "acessorios",
     subcategory: "bolsas",
@@ -355,6 +358,15 @@ export const products: Product[] = [
   },
 ];
 
+export const products: Product[] = rawProducts.map((p, i) => ({
+  ...p,
+  stock: p.stock ?? 8 + ((i * 7) % 23),
+  rating: p.rating ?? 4.5 + ((i * 3) % 5) / 10,
+  reviews: p.reviews ?? 12 + ((i * 37) % 180),
+  isFeatured: p.isFeatured ?? i < 4,
+  active: true,
+}));
+
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
@@ -371,9 +383,3 @@ export function getPromoProducts(): Product[] {
   return products.filter((p) => p.isPromo);
 }
 
-export function formatPrice(price: number): string {
-  return price.toLocaleString("pt-PT", {
-    style: "currency",
-    currency: "EUR",
-  });
-}

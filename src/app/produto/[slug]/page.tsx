@@ -1,18 +1,20 @@
-import { products, getProductBySlug } from "@/lib/data";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getProduct, getProducts } from "@/lib/catalog";
 import ProductDetail from "./ProductDetail";
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+type Params = Promise<{ slug: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const product = await getProduct((await params).slug);
+  return product ? { title: `${product.name} | Aela.`, description: product.description } : {};
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
-  
-  if (!product) {
-    notFound();
-  }
-  
-  return <ProductDetail product={product} />;
+  const all = await getProducts();
+  const product = all.find((p) => p.slug === slug);
+  if (!product) notFound();
+  const related = all.filter((p) => p.id !== product.id && (p.subcategory === product.subcategory || p.category === product.category)).slice(0, 4);
+  return <ProductDetail product={product} related={related} />;
 }

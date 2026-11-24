@@ -10,37 +10,37 @@ export function Footer() {
             <h3 className="text-xs uppercase tracking-widest font-medium text-gold-500 mb-8">Comprar</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/novidades" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?filtro=novos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Novidades
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=vestidos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?categoria=vestidos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Vestidos
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=tops" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?categoria=blusas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Tops & Blusas
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=saias" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?categoria=saias" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Saias
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=sapatos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?categoria=sapatos" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Sapatos
                 </Link>
               </li>
               <li>
-                <Link href="/produtos?subcategory=malas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
-                  Malas
+                <Link href="/produtos?categoria=bolsas" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                  Bolsas
                 </Link>
               </li>
               <li>
-                <Link href="/acessorios" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
+                <Link href="/produtos?categoria=bijuteria" className="text-sm text-warm-400 hover:text-gold-400 transition-colors duration-300">
                   Acessórios
                 </Link>
               </li>
@@ -105,7 +105,7 @@ export function Footer() {
               <form className="flex border-b border-warm-400/30 group relative focus-within:border-gold-400 transition-colors duration-300">
                 <input 
                   type="email" 
-                  placeholder="O seu endereço de email" 
+                  placeholder="Seu e-mail" 
                   className="bg-transparent w-full py-2 text-sm text-warm-100 focus:outline-none placeholder:text-warm-400/50"
                   required
                 />
@@ -144,7 +144,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-10 border-t border-gold-700/20 gap-6">
           <div className="text-[10px] uppercase tracking-widest text-warm-400">
-            Visa · Mastercard · American Express · PayPal · MB Way · Multibanco
+            Pix · Cartão de débito · Crédito em até 12x · Boleto à vista
           </div>
 
           <p className="text-[11px] text-warm-500 text-center md:text-right tracking-wide">

@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X, Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/store/cart";
-import { formatPrice } from "@/lib/data";
+import { useHydrated } from "@/lib/use-hydrated";
+import { formatPrice } from "@/lib/format";
+import { STORE } from "@/lib/store-config";
+import { maxInstallment, pixPrice } from "@/lib/payments/installments";
 
 export function CartDrawer() {
   const items = useCartStore((state) => state.items);
@@ -16,11 +19,7 @@ export function CartDrawer() {
   const totalPrice = useCartStore((state) => state.totalPrice());
   const totalItems = useCartStore((state) => state.totalItems());
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHydrated();
 
   useEffect(() => {
     if (isOpen) {
@@ -54,7 +53,7 @@ export function CartDrawer() {
           <div className="flex items-center gap-3">
             <ShoppingBag className="w-5 h-5 text-gold-300" />
             <h2 className="text-xl text-gold-300 font-serif font-medium tracking-widest uppercase">
-              Carrinho
+              Sacola
             </h2>
             <span className="bg-gold-400 text-noir-950 text-xs font-bold px-2.5 py-0.5 rounded-full ml-1">
               {totalItems}
@@ -69,6 +68,19 @@ export function CartDrawer() {
           </button>
         </header>
 
+        {items.length > 0 && (
+          <div className="px-6 py-4 border-b border-noir-700">
+            <p className="text-xs text-warm-300 mb-2">
+              {totalPrice >= STORE.freeShippingThreshold
+                ? "Parabéns! Você ganhou frete grátis ✨"
+                : `Faltam ${formatPrice(STORE.freeShippingThreshold - totalPrice)} para frete grátis`}
+            </p>
+            <div className="h-1 bg-noir-700 overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-gold-600 to-gold-300 transition-all duration-700" style={{ width: `${Math.min(100, (totalPrice / STORE.freeShippingThreshold) * 100)}%` }} />
+            </div>
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto no-scrollbar p-6">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
@@ -80,7 +92,7 @@ export function CartDrawer() {
                 onClick={close}
                 className="px-8 py-3 border border-gold-500 text-gold-400 hover:bg-gold-400 hover:text-noir-950 transition-colors uppercase tracking-[0.2em] text-xs font-bold"
               >
-                Continuar a Comprar
+                Continuar comprando
               </button>
             </div>
           ) : (
@@ -184,6 +196,9 @@ export function CartDrawer() {
                 {formatPrice(totalPrice)}
               </span>
             </div>
+            <p className="-mt-4 mb-6 text-right text-[11px] text-warm-400">
+              {maxInstallment(totalPrice).count}x de {formatPrice(maxInstallment(totalPrice).value)} sem juros · <span className="text-gold-400">{formatPrice(pixPrice(totalPrice))} no Pix</span>
+            </p>
 
             <div className="space-y-4">
               <Link
@@ -198,7 +213,7 @@ export function CartDrawer() {
                 onClick={close}
                 className="w-full text-center text-warm-400 hover:text-gold-400 text-xs transition-colors tracking-widest uppercase py-2"
               >
-                Continuar a Comprar
+                Continuar comprando
               </button>
             </div>
           </div>
