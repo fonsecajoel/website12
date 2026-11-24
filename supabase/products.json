@@ -1,0 +1,664 @@
+[
+  {
+    "id": "1",
+    "name": "Blazer Oversized Linho",
+    "slug": "blazer-oversized-linho",
+    "price": 249.9,
+    "original_price": 329.9,
+    "images": [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "blazers",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Areia",
+        "hex": "#d2b48c"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      }
+    ],
+    "description": "Blazer oversized em linho com corte moderno e elegante. Perfeito para ocasiões casuais e formais.",
+    "stock": 8,
+    "rating": 4.5,
+    "reviews": 12,
+    "is_new": true,
+    "is_promo": true,
+    "is_featured": true,
+    "active": true
+  },
+  {
+    "id": "2",
+    "name": "T-shirt Essential Algodão",
+    "slug": "t-shirt-essential-algodao",
+    "price": 59.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "t-shirts",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Branco",
+        "hex": "#f5f0eb"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Caramelo",
+        "hex": "#c9a96e"
+      }
+    ],
+    "description": "T-shirt essencial em algodão orgânico. Base perfeita para qualquer look.",
+    "stock": 15,
+    "rating": 4.8,
+    "reviews": 49,
+    "is_new": false,
+    "is_promo": false,
+    "is_featured": true,
+    "active": true
+  },
+  {
+    "id": "3",
+    "name": "Calça Wide Leg Jeans",
+    "slug": "calca-wide-leg-jeans",
+    "price": 189.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "calças",
+    "sizes": [
+      "34",
+      "36",
+      "38",
+      "40",
+      "42",
+      "44"
+    ],
+    "colors": [
+      {
+        "name": "Azul Médio",
+        "hex": "#5b8fb9"
+      },
+      {
+        "name": "Azul Escuro",
+        "hex": "#1e3a5f"
+      }
+    ],
+    "description": "Calça wide leg em denim premium com lavagem contemporânea.",
+    "stock": 22,
+    "rating": 4.6,
+    "reviews": 86,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": true,
+    "active": true
+  },
+  {
+    "id": "4",
+    "name": "Vestido Midi Canelado",
+    "slug": "vestido-midi-canelado",
+    "price": 149.9,
+    "original_price": 199.9,
+    "images": [
+      "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "vestidos",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Verde Oliva",
+        "hex": "#556b2f"
+      },
+      {
+        "name": "Terracota",
+        "hex": "#cc7044"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      }
+    ],
+    "description": "Vestido midi em malha canelada com caimento fluido e elegante.",
+    "stock": 29,
+    "rating": 4.9,
+    "reviews": 123,
+    "is_new": false,
+    "is_promo": true,
+    "is_featured": true,
+    "active": true
+  },
+  {
+    "id": "5",
+    "name": "Vestido Longo Festa Dourado",
+    "slug": "vestido-longo-festa-dourado",
+    "price": 449.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "vestidos",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Dourado",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      }
+    ],
+    "description": "Vestido longo de festa com brilho sofisticado e fenda lateral. A peça perfeita para qualquer evento especial.",
+    "stock": 13,
+    "rating": 4.7,
+    "reviews": 160,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "7",
+    "name": "Bolsa Structured Couro Premium",
+    "slug": "bolsa-structured-couro-premium",
+    "price": 389.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "acessorios",
+    "subcategory": "bolsas",
+    "sizes": [
+      "Único"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Caramelo",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Creme",
+        "hex": "#f5f0eb"
+      }
+    ],
+    "description": "Bolsa estruturada em couro premium com forro de seda. Design atemporal que eleva qualquer visual.",
+    "stock": 20,
+    "rating": 4.5,
+    "reviews": 17,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "8",
+    "name": "Scarpin Salto Alto Verniz",
+    "slug": "scarpin-salto-alto-verniz",
+    "price": 239.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "sapatos",
+    "sizes": [
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Nude",
+        "hex": "#d2b48c"
+      },
+      {
+        "name": "Vermelho",
+        "hex": "#b22222"
+      }
+    ],
+    "description": "Scarpin clássico em verniz com salto de 10cm. Sofisticação absoluta.",
+    "stock": 27,
+    "rating": 4.8,
+    "reviews": 54,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "9",
+    "name": "Saia Midi Plissada",
+    "slug": "saia-midi-plissada",
+    "price": 139.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1551803091-e20673f15770?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1577900232427-18219b9166a0?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "saias",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Dourado",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      }
+    ],
+    "description": "Saia midi plissada com brilho sofisticado para ocasiões especiais.",
+    "stock": 11,
+    "rating": 4.6,
+    "reviews": 91,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "10",
+    "name": "Cropped Tricot",
+    "slug": "cropped-tricot",
+    "price": 89.9,
+    "original_price": 119.9,
+    "images": [
+      "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "tricot",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Creme",
+        "hex": "#f5f0eb"
+      },
+      {
+        "name": "Rosa Antigo",
+        "hex": "#c08081"
+      }
+    ],
+    "description": "Cropped em tricot macio com textura delicada. Perfeito para meia estação.",
+    "stock": 18,
+    "rating": 4.9,
+    "reviews": 128,
+    "is_new": false,
+    "is_promo": true,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "11",
+    "name": "Body Manga Longa Decote V",
+    "slug": "body-manga-longa-decote-v",
+    "price": 79.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "bodys",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Branco",
+        "hex": "#f5f0eb"
+      },
+      {
+        "name": "Vinho",
+        "hex": "#722f37"
+      }
+    ],
+    "description": "Body de manga longa com decote V profundo. A base perfeita para looks elegantes.",
+    "stock": 25,
+    "rating": 4.7,
+    "reviews": 165,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "12",
+    "name": "Conjunto Alfaiataria Power",
+    "slug": "conjunto-alfaiataria-power",
+    "price": 379.9,
+    "original_price": 489.9,
+    "images": [
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "conjuntos",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Branco",
+        "hex": "#f5f0eb"
+      }
+    ],
+    "description": "Conjunto de alfaiataria com blazer cropped e calça palazzo. Power dressing para mulheres que lideram.",
+    "stock": 9,
+    "rating": 4.5,
+    "reviews": 22,
+    "is_new": false,
+    "is_promo": true,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "13",
+    "name": "Macacão Pantalona Crepe",
+    "slug": "macacao-pantalona-crepe",
+    "price": 269.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "macacões",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Terracota",
+        "hex": "#cc7044"
+      }
+    ],
+    "description": "Macacão pantalona em crepe leve com decote envolvente.",
+    "stock": 16,
+    "rating": 4.8,
+    "reviews": 59,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "14",
+    "name": "Brincos Cascata Dourados",
+    "slug": "brincos-cascata-dourados",
+    "price": 59.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "acessorios",
+    "subcategory": "bijuteria",
+    "sizes": [
+      "Único"
+    ],
+    "colors": [
+      {
+        "name": "Dourado",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Prata",
+        "hex": "#c0c0c0"
+      }
+    ],
+    "description": "Brincos em cascata com banho de ouro 18k. O toque final de luxo para qualquer look.",
+    "stock": 23,
+    "rating": 4.6,
+    "reviews": 96,
+    "is_new": false,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "15",
+    "name": "Sandália Tiras Finas Metalizada",
+    "slug": "sandalia-tiras-finas-metalizada",
+    "price": 199.9,
+    "original_price": 259.9,
+    "images": [
+      "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "sapatos",
+    "sizes": [
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40"
+    ],
+    "colors": [
+      {
+        "name": "Dourado",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Prata",
+        "hex": "#c0c0c0"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      }
+    ],
+    "description": "Sandália de tiras finas metalizadas com salto bloco de 8cm. Conforto e glamour em cada passo.",
+    "stock": 30,
+    "rating": 4.9,
+    "reviews": 133,
+    "is_new": false,
+    "is_promo": true,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "16",
+    "name": "Blusa Cetim Gola Laço",
+    "slug": "blusa-cetim-gola-laco",
+    "price": 119.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "blusas",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Champagne",
+        "hex": "#f7e7ce"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Bordô",
+        "hex": "#800020"
+      }
+    ],
+    "description": "Blusa em cetim com gola laço e mangas bufantes. Feminilidade e sofisticação em cada detalhe.",
+    "stock": 14,
+    "rating": 4.7,
+    "reviews": 170,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "17",
+    "name": "Clutch Festa Cristais",
+    "slug": "clutch-festa-cristais",
+    "price": 169.9,
+    "original_price": null,
+    "images": [
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "acessorios",
+    "subcategory": "bolsas",
+    "sizes": [
+      "Único"
+    ],
+    "colors": [
+      {
+        "name": "Dourado",
+        "hex": "#c9a96e"
+      },
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Prata",
+        "hex": "#c0c0c0"
+      }
+    ],
+    "description": "Clutch de festa com aplicação de cristais e corrente removível.",
+    "stock": 21,
+    "rating": 4.5,
+    "reviews": 27,
+    "is_new": true,
+    "is_promo": false,
+    "is_featured": false,
+    "active": true
+  },
+  {
+    "id": "18",
+    "name": "Vestido Tubinho Bandagem",
+    "slug": "vestido-tubinho-bandagem",
+    "price": 209.9,
+    "original_price": 279.9,
+    "images": [
+      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=800&fit=crop&q=80&auto=format",
+      "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&h=800&fit=crop&q=80&auto=format"
+    ],
+    "category": "feminino",
+    "subcategory": "vestidos",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Preto",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Vermelho",
+        "hex": "#b22222"
+      }
+    ],
+    "description": "Vestido tubinho em bandagem que modela o corpo com elegância.",
+    "stock": 28,
+    "rating": 4.8,
+    "reviews": 64,
+    "is_new": false,
+    "is_promo": true,
+    "is_featured": false,
+    "active": true
+  }
+]

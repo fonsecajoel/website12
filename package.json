@@ -10,7 +10,8 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "seed:sql": "node scripts/gen-seed.ts",
-    "admin:create": "node scripts/create-admin.mjs"
+    "admin:create": "node scripts/create-admin.mjs",
+    "setup:loja": "node scripts/setup.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
